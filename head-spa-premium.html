@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Head Spa Premium — LUMIA Face Lab · Bari</title>
+  <meta name="description" content="Head Spa Premium a Bari: massaggio giapponese del cuoio capelluto, fototerapia LED e trattamento nutriente. Un'ora di rigenerazione profonda. LUMIA Face Lab di Marica Cea.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+  :root{--gold:#B8965A;--gold-deep:#8B6B2E;--gold-pale:#E8D5B0;--gold-mist:rgba(184,150,90,.08);--cream:#F8F4EF;--cream-warm:#EDE7DF;--surface:#FDFAF6;--ink:#1A1814;--ink-soft:#4A4540;--ink-muted:#7A7570;--dark:#272420;--f-display:'Cormorant',Georgia,'Times New Roman',serif;--f-body:'Outfit',system-ui,-apple-system,sans-serif;--ease:cubic-bezier(.16,1,.3,1);--fast:180ms;--base:380ms;--slow:680ms;--max-w:1400px;--pad-x:clamp(1.25rem,5vw,3rem);--pad-y:clamp(4rem,9vw,8rem);}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;font-optical-sizing:auto;}body{font-family:var(--f-body);font-weight:400;color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}body.no-scroll{overflow:hidden;}img{max-width:100%;display:block;}a{color:inherit;text-decoration:none;}button{font-family:inherit;cursor:pointer;border:none;background:none;}h1,h2,h3,h4{font-family:var(--f-display);font-weight:300;line-height:1.05;text-wrap:balance;}
+  .label{font-family:var(--f-body);font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);}.label--gold{color:var(--gold-deep);}
+  .container{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);}.container--narrow{max-width:920px;}.section{padding:var(--pad-y) 0;}
+  .btn{display:inline-flex;align-items:center;gap:.625rem;font-family:var(--f-body);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9375rem 1.875rem;cursor:pointer;white-space:nowrap;transition:background var(--base) var(--ease),color var(--base) var(--ease),border-color var(--base) var(--ease),transform var(--fast);}.btn:active{transform:scale(.97);}
+  .btn--primary{background:var(--gold);color:var(--ink);border:1px solid var(--gold);}.btn--primary:hover{background:var(--gold-deep);border-color:var(--gold-deep);}
+  .btn--outline{background:transparent;color:var(--ink);border:1px solid var(--ink);}.btn--outline:hover{background:var(--ink);color:var(--surface);}
+  .btn--ghost-dark{background:transparent;color:var(--surface);border:1px solid rgba(253,250,246,.3);}.btn--ghost-dark:hover{border-color:var(--surface);background:rgba(253,250,246,.1);}
+  .btn svg{width:1rem;height:1rem;flex-shrink:0;}
+  .skip-link{position:absolute;top:-100%;left:1rem;background:var(--ink);color:var(--surface);padding:.5rem 1rem;font-size:.875rem;z-index:9999;transition:top var(--fast);}.skip-link:focus{top:1rem;}
+  .cookie-overlay{position:fixed;inset:0;background:rgba(26,24,20,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:99999;display:flex;align-items:flex-end;justify-content:center;padding:1.5rem;transition:opacity var(--slow) var(--ease),visibility var(--slow);}@media(min-width:640px){.cookie-overlay{align-items:center;}}.cookie-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  .cookie-modal{background:var(--surface);max-width:460px;width:100%;padding:2.25rem 2rem 1.75rem;animation:slideUp .5s var(--ease) both;}@keyframes slideUp{from{opacity:0;transform:translateY(1.5rem);}to{opacity:1;transform:translateY(0);}}
+  .cookie-modal-brand{font-family:var(--f-body);font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;display:inline-block;border-bottom:1px solid var(--gold);padding-bottom:.25rem;margin-bottom:1.25rem;}.cookie-modal p{font-size:.875rem;color:var(--ink-soft);line-height:1.7;margin-bottom:.625rem;}.cookie-modal a{color:var(--gold-deep);text-decoration:underline;text-underline-offset:2px;}.cookie-actions{display:flex;gap:.75rem;margin-top:1.75rem;}.cookie-actions .btn{flex:1;justify-content:center;padding:.8125rem 1rem;}
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.75rem 0;transition:background var(--base) var(--ease),padding var(--base) var(--ease),box-shadow var(--base) var(--ease);}.site-nav.scrolled{background:rgba(248,244,239,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:1.125rem 0;box-shadow:0 1px 0 rgba(26,24,20,.07);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}.nav-logo{font-family:var(--f-body);font-size:1rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);transition:opacity var(--fast);}.nav-logo:hover{opacity:.65;}
+  .nav-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:2.5rem;height:2.5rem;padding:.5rem;margin-right:-.5rem;-webkit-tap-highlight-color:transparent;}.nav-toggle span{display:block;width:1.5rem;height:1.5px;background:var(--ink);transition:transform var(--base) var(--ease),opacity var(--fast);transform-origin:center;}.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;transform:scaleX(0);}.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+  .nav-menu{position:fixed;inset:0;background:var(--dark);z-index:800;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-x);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--base) var(--ease),visibility var(--base);}.nav-menu.open{opacity:1;visibility:visible;pointer-events:auto;}.nav-menu-list{list-style:none;display:flex;flex-direction:column;gap:clamp(1rem,3vh,1.75rem);margin-bottom:clamp(2rem,5vh,3rem);}.nav-menu-list a{font-family:var(--f-display);font-size:clamp(2.25rem,7vw,4rem);font-weight:300;font-style:italic;color:var(--surface);transition:color var(--fast);display:inline-block;}.nav-menu-list a:hover{color:var(--gold);}.nav-menu-footer{display:flex;flex-direction:column;gap:1rem;}.nav-contact-info{font-size:.75rem;color:rgba(253,250,246,.45);letter-spacing:.05em;}
+  .treatment-hero{display:grid;grid-template-columns:1fr;min-height:100svh;}@media(min-width:900px){.treatment-hero{grid-template-columns:1fr 1fr;}}
+  .hero-text{display:flex;flex-direction:column;justify-content:flex-end;padding:calc(5rem + var(--pad-x)) var(--pad-x) clamp(3rem,7vw,5rem);background:var(--cream);}@media(min-width:900px){.hero-text{justify-content:center;padding:7rem clamp(2rem,6vw,5rem) 5rem clamp(2rem,7vw,5rem);}}
+  .hero-back{display:inline-flex;align-items:center;gap:.5rem;font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:clamp(2rem,5vh,3.5rem);transition:gap var(--base) var(--ease);}.hero-back:hover{gap:.875rem;}.hero-back svg{width:.875rem;height:.875rem;}
+  .hero-num{font-family:var(--f-display);font-size:clamp(5rem,12vw,9rem);font-weight:300;color:rgba(26,24,20,.04);line-height:1;margin-bottom:-.5rem;margin-left:-.08em;user-select:none;pointer-events:none;}
+  .hero-tag{font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:.875rem;}
+  .hero-title{font-family:var(--f-display);font-size:clamp(3rem,8vw,6.5rem);font-weight:300;color:var(--ink);line-height:1;margin-bottom:1.25rem;}
+  .hero-tagline{font-family:var(--f-display);font-size:clamp(1.125rem,2.5vw,1.5rem);font-weight:300;font-style:italic;color:var(--ink-soft);line-height:1.5;max-width:36ch;margin-bottom:2.25rem;}
+  .hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;}
+  .hero-img{position:relative;overflow:hidden;min-height:55vw;}@media(min-width:900px){.hero-img{min-height:unset;}}.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;}@media(min-width:900px){.hero-img::before{content:'';position:absolute;inset:0 auto 0 0;width:clamp(80px,12vw,200px);background:linear-gradient(to right,var(--cream),transparent);z-index:1;pointer-events:none;}}
+  .empatia{background:var(--dark);padding:var(--pad-y) 0;}.empatia-inner{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,6vw,5rem);align-items:center;}@media(min-width:900px){.empatia-inner{grid-template-columns:1fr 1fr;}}
+  .empatia-quote{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.75rem);font-weight:300;font-style:italic;color:var(--surface);line-height:1.2;}.empatia-quote em{font-style:normal;color:var(--gold);}
+  .empatia-right{display:flex;flex-direction:column;gap:1.5rem;}.empatia-intro{font-size:1.0625rem;font-weight:300;color:rgba(253,250,246,.7);line-height:1.75;}
+  .empatia-list{list-style:none;display:flex;flex-direction:column;gap:.875rem;}.empatia-list li{display:flex;align-items:flex-start;gap:1rem;font-size:.9375rem;font-weight:300;color:rgba(253,250,246,.85);line-height:1.6;}.empatia-list li::before{content:'';flex-shrink:0;width:1px;height:1.2em;background:var(--gold);margin-top:.2em;}
+  .empatia-bridge{font-family:var(--f-display);font-size:1.0625rem;font-weight:300;font-style:italic;color:var(--gold-pale);padding-top:1.25rem;border-top:1px solid rgba(184,150,90,.2);}
+  .protocollo{background:var(--surface);padding:var(--pad-y) 0;}.proto-header{margin-bottom:clamp(3rem,7vw,5rem);}.proto-title{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:300;color:var(--ink);margin-bottom:.75rem;}.proto-sub{font-size:1rem;font-weight:300;color:var(--ink-muted);max-width:52ch;line-height:1.75;}
+  .steps{display:flex;flex-direction:column;}.step{display:grid;grid-template-columns:4rem 1fr;gap:0 2rem;padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid rgba(26,24,20,.06);}@media(min-width:768px){.step{grid-template-columns:6rem 1fr;gap:0 3rem;}}.step:last-child{border-bottom:1px solid rgba(26,24,20,.06);}
+  .step-num{font-family:var(--f-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:rgba(26,24,20,.1);line-height:1;padding-top:.2em;}.step-name{font-family:var(--f-display);font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:400;color:var(--ink);margin-bottom:.625rem;}.step-desc{font-size:.9375rem;font-weight:300;color:var(--ink-soft);line-height:1.8;max-width:64ch;}
+  .risultati{background:var(--cream-warm);padding:var(--pad-y) 0;}.risultati-header{margin-bottom:clamp(2.5rem,6vw,4.5rem);}.risultati-title{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:300;color:var(--ink);margin-bottom:.5rem;}.risultati-sub{font-size:.9375rem;font-weight:300;color:var(--ink-muted);}
+  .timeline{display:grid;grid-template-columns:1fr;}@media(min-width:640px){.timeline{grid-template-columns:repeat(3,1fr);}}.timeline-item{padding:2.5rem 2rem;}@media(min-width:640px){.timeline-item+.timeline-item{border-left:1px solid rgba(26,24,20,.08);}}
+  .timeline-marker{font-family:var(--f-display);font-size:.875rem;font-weight:400;font-style:italic;color:var(--gold-deep);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}.timeline-marker::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;max-width:3rem;}
+  .timeline-heading{font-family:var(--f-display);font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:300;color:var(--ink);margin-bottom:.75rem;line-height:1.2;}.timeline-desc{font-size:.875rem;font-weight:300;color:var(--ink-soft);line-height:1.75;}
+  .per-chi{background:var(--surface);padding:var(--pad-y) 0;}.per-chi-inner{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,6vw,5rem);}@media(min-width:768px){.per-chi-inner{grid-template-columns:1fr 1fr;}}
+  .per-chi-title{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:300;color:var(--ink);margin-bottom:clamp(2rem,4vw,3rem);grid-column:1/-1;}.per-chi-col-label{font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1.25rem;}
+  .per-chi-list{list-style:none;display:flex;flex-direction:column;gap:.875rem;}.per-chi-list li{display:flex;align-items:flex-start;gap:.875rem;font-size:.9375rem;font-weight:300;color:var(--ink-soft);line-height:1.55;}.per-chi-list li svg{width:1rem;height:1rem;flex-shrink:0;margin-top:.15em;color:var(--gold-deep);}.per-chi-list li.caution svg{color:var(--ink-muted);}.per-chi-list li.caution{color:var(--ink-muted);}
+  .per-chi-note{grid-column:1/-1;font-size:.8125rem;font-weight:300;color:var(--ink-muted);line-height:1.7;padding:1.25rem 1.5rem;border-left:2px solid rgba(184,150,90,.35);background:var(--gold-mist);}
+  .cta-finale{background:var(--dark);padding:clamp(5rem,10vw,9rem) 0;text-align:center;}.cta-finale-label{color:var(--gold-deep);margin-bottom:1.25rem;}.cta-finale-title{font-family:var(--f-display);font-size:clamp(2.25rem,6vw,5rem);font-weight:300;font-style:italic;color:var(--surface);line-height:1.1;margin-bottom:.75rem;}.cta-finale-sub{font-size:1rem;font-weight:300;color:rgba(253,250,246,.55);max-width:44ch;margin:0 auto 2.75rem;line-height:1.7;}.cta-finale-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+  .site-footer{background:var(--cream-warm);padding:clamp(2.5rem,5vw,4rem) 0;}.footer-inner{display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start;}@media(min-width:640px){.footer-inner{flex-direction:row;justify-content:space-between;align-items:center;}}.footer-brand{font-family:var(--f-display);font-size:1.75rem;font-weight:300;font-style:italic;color:var(--ink);}.footer-legal{font-size:.6875rem;color:var(--ink-muted);}.footer-legal a{color:var(--ink-soft);text-decoration:underline;text-underline-offset:2px;}.footer-legal a:hover{color:var(--ink);}
+  .whatsapp-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:800;width:3.25rem;height:3.25rem;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.28);transition:transform var(--fast),box-shadow var(--fast);-webkit-tap-highlight-color:transparent;}.whatsapp-fab:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(37,211,102,.38);}.whatsapp-fab:active{transform:scale(.94);}.whatsapp-fab svg{width:1.5rem;height:1.5rem;fill:#fff;}
+  [data-reveal]{opacity:0;transform:translateY(1.5rem);transition:opacity .75s var(--ease),transform .75s var(--ease);}[data-reveal="left"]{transform:translateX(-1.5rem);}[data-reveal="right"]{transform:translateX(1.5rem);}[data-reveal].revealed{opacity:1;transform:none;}[data-delay="1"]{transition-delay:80ms;}[data-delay="2"]{transition-delay:160ms;}[data-delay="3"]{transition-delay:240ms;}[data-delay="4"]{transition-delay:320ms;}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}[data-reveal]{opacity:1;transform:none;}}
+  
+  .marica-strip{background:var(--dark);padding:var(--pad-y) 0;}.marica-inner{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,6vw,5rem);align-items:center;}@media(min-width:768px){.marica-inner{grid-template-columns:1fr 1fr;}}.marica-quote{font-family:var(--f-display);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:300;font-style:italic;color:var(--surface);line-height:1.35;margin:1.25rem 0 1rem;}.marica-sig{font-size:.8125rem;font-weight:400;letter-spacing:.08em;color:var(--gold);}.marica-creds{display:flex;flex-direction:column;gap:2rem;border-left:1px solid rgba(184,150,90,.2);padding-left:clamp(1.5rem,4vw,3rem);}.marica-cred-num{display:block;font-family:var(--f-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--gold);line-height:1;}.marica-cred-label{display:block;font-size:.8125rem;font-weight:400;color:rgba(253,250,246,.55);margin-top:.375rem;line-height:1.5;max-width:22ch;}.testi-strip{background:var(--cream-warm);padding:var(--pad-y) 0;}.testi-header{margin-bottom:0;}.testi-manifesto{font-family:var(--f-display);font-size:clamp(1.75rem,4vw,3.5rem);font-weight:300;font-style:italic;color:var(--ink);line-height:1.15;margin-top:1rem;}.testi-manifesto em{font-style:normal;font-weight:600;color:var(--gold-deep);}.testi-divider{display:flex;align-items:center;margin:clamp(1.5rem,3vw,2rem) 0 clamp(2rem,4vw,3.5rem);}.testi-divider-line{flex:1;height:1px;background:linear-gradient(to right,var(--gold),transparent);opacity:.4;}.testi-grid{display:grid;grid-template-columns:1fr;}@media(min-width:640px){.testi-grid{grid-template-columns:1fr 1fr;}}.testi-item{padding:2.5rem 2rem;}@media(min-width:640px){.testi-item+.testi-item{border-left:1px solid rgba(26,24,20,.08);}}.testi-mark{font-family:var(--f-display);font-size:4rem;font-weight:300;color:var(--gold);line-height:.6;margin-bottom:1.25rem;opacity:.5;}.testi-text{font-family:var(--f-display);font-size:clamp(1rem,2vw,1.25rem);font-weight:300;font-style:italic;color:var(--ink);line-height:1.65;margin-bottom:1.25rem;}.testi-stars{color:var(--gold);font-size:.75rem;letter-spacing:.15em;margin-bottom:.375rem;}.testi-author{font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);}.faq{background:var(--surface);padding:var(--pad-y) 0;}.faq-title{font-family:var(--f-display);font-size:clamp(1.75rem,4vw,3rem);font-weight:300;color:var(--ink);margin:1rem 0 clamp(2rem,5vw,3.5rem);}.faq-list{display:flex;flex-direction:column;}details.faq-item{border-top:1px solid rgba(26,24,20,.06);padding:1.5rem 0;}details.faq-item:last-child{border-bottom:1px solid rgba(26,24,20,.06);}details.faq-item summary{font-family:var(--f-display);font-size:clamp(1.0625rem,2vw,1.375rem);font-weight:400;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;-webkit-tap-highlight-color:transparent;}details.faq-item summary::-webkit-details-marker{display:none;}details.faq-item summary::after{content:'+';font-family:var(--f-body);font-size:1.25rem;font-weight:300;color:var(--gold-deep);flex-shrink:0;transition:transform var(--base) var(--ease);}details.faq-item[open] summary::after{transform:rotate(45deg);}.faq-answer{font-size:.9375rem;font-weight:300;color:var(--ink-soft);line-height:1.8;max-width:62ch;padding-top:1rem;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  </style>
+</head>
+<body class="no-scroll">
+<a class="skip-link" href="#main">Vai al contenuto principale</a>
+<div class="cookie-overlay" id="cookieOverlay" role="dialog" aria-modal="true" aria-labelledby="cookieTitle"><div class="cookie-modal"><span class="cookie-modal-brand">LUMIA</span><p id="cookieTitle" style="font-size:.9375rem;color:var(--ink);font-weight:500;margin-bottom:.625rem;">La tua privacy conta</p><p>Utilizziamo cookie tecnici per migliorare la tua esperienza e cookie analitici per capire come viene usato il sito.</p><p><a href="privacy-policy.html">Leggi la Privacy Policy</a></p><div class="cookie-actions"><button class="btn btn--primary" id="cookieAccept" type="button">Accetta tutti</button><button class="btn btn--outline" id="cookieReject" type="button">Solo tecnici</button></div></div></div>
+<header>
+  <nav class="site-nav" id="siteNav" aria-label="Navigazione principale"><div class="container nav-inner"><a href="/" class="nav-logo" aria-label="LUMIA Face Lab — Homepage">LUMIA</a><button class="nav-toggle" id="navToggle" aria-controls="navMenu" aria-expanded="false" aria-label="Apri menu"><span></span><span></span><span></span></button></div></nav>
+  <div class="nav-menu" id="navMenu" role="navigation" aria-label="Menu principale"><ul class="nav-menu-list"><li><a href="/#trattamenti" class="js-menu-link">Trattamenti</a></li><li><a href="/#chi-siamo" class="js-menu-link">Chi Siamo</a></li><li><a href="/#newsletter" class="js-menu-link">Newsletter</a></li><li><a href="/#dove-siamo" class="js-menu-link">Dove Siamo</a></li></ul><div class="nav-menu-footer"><a href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20un%20trattamento" class="btn btn--primary" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Prenota ora</a><p class="nav-contact-info">Via Vico Traversa 1 · Bari</p></div></div>
+</header>
+
+<main id="main">
+  <section class="treatment-hero" aria-label="Head Spa Premium — LUMIA Face Lab">
+    <div class="hero-text">
+      <a href="/#trattamenti" class="hero-back" data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>Tutti i trattamenti</a>
+      <p class="hero-num" aria-hidden="true">05</p>
+      <p class="hero-tag" data-reveal data-delay="1">Relax &amp; benessere</p>
+      <h1 class="hero-title" data-reveal data-delay="2">Head Spa<br>Premium</h1>
+      <p class="hero-tagline" data-reveal data-delay="3">Un'ora che non appartiene<br>a nessuno tranne che a te.</p>
+      <div class="hero-actions" data-reveal data-delay="4">
+        <a href="https://wa.me/393401234567?text=Ciao%20Marica,%20vorrei%20informazioni%20sull%27Head%20Spa%20Premium" class="btn btn--primary" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Scrivimi su WhatsApp</a>
+        <a href="#protocollo" class="btn btn--outline">Scopri il protocollo <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-img" aria-hidden="true"><img src="images/trattamenti/head_spa.png" alt="Head Spa Premium — massaggio giapponese e benessere del cuoio capelluto"></div>
+  </section>
+
+  <section class="empatia" aria-label="Ti riconosci?">
+    <div class="container"><div class="empatia-inner">
+      <div data-reveal="left"><p class="empatia-quote">Sai di che<br>stanchezza parlo.<br>Quella che non passa<br><em>dormendo.</em></p></div>
+      <div class="empatia-right" data-reveal="right">
+        <p class="empatia-intro">La testa pesante, le spalle alte, la mascella che stringi senza accorgertene. Il pensiero che continua a girare anche quando vorresti fermarlo. Hai bisogno di fermarti davvero. Non di una pausa di dieci minuti, non di una serata sul divano.</p>
+        <ul class="empatia-list">
+          <li>La tensione alla nuca che non se ne va mai del tutto</li>
+          <li>Il cuoio capelluto che brucia o prude, senza motivo apparente</li>
+          <li>I capelli che cadono più del solito nei periodi di stress</li>
+          <li>Non riesci a ricordare l'ultima volta che ti sei fermata davvero</li>
+        </ul>
+        <p class="empatia-bridge">L'Head Spa Premium non è un massaggio. È un'ora in cui il tuo sistema nervoso impara a lasciare andare.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="protocollo section" id="protocollo" aria-label="Il protocollo Head Spa Premium">
+    <div class="container">
+      <div class="proto-header" data-reveal>
+        <span class="label label--gold" style="display:block;margin-bottom:1rem;">Il protocollo</span>
+        <h2 class="proto-title">Come funziona</h2>
+        <p class="proto-sub">Un rituale in cinque fasi che agisce in profondità: sul cuoio capelluto, sulla tensione muscolare, sul sistema nervoso. Esci diversa da come sei entrata.</p>
+      </div>
+      <div class="steps">
+        <div class="step" data-reveal><span class="step-num" aria-hidden="true">01</span><div><h3 class="step-name">Analisi del cuoio capelluto</h3><p class="step-desc">Con strumentazione dedicata Marica analizza lo stato del cuoio capelluto: idratazione, produzione di sebo, densità follicolare. Il trattamento si costruisce su quello che la testa ha davvero bisogno — non su un protocollo standard.</p></div></div>
+        <div class="step" data-reveal><span class="step-num" aria-hidden="true">02</span><div><h3 class="step-name">Detersione rituale con olio</h3><p class="step-desc">Un olio detergente profumato viene applicato con movimenti lenti e deliberati che già da soli iniziano a sciogliere la tensione. Primo segnale al sistema nervoso: puoi rilassarti. Il trattamento comincia da qui, molto prima del massaggio.</p></div></div>
+        <div class="step" data-reveal><span class="step-num" aria-hidden="true">03</span><div><h3 class="step-name">Massaggio giapponese Anma</h3><p class="step-desc">Tecnica millenaria tramandata nella tradizione dei barbieri giapponesi. Pressioni precise su punti specifici del cuoio capelluto, della nuca e delle tempie per sciogliere la tensione accumulata, drenare e riattivare la circolazione profonda. La parte che le clienti descrivono come "non ho mai sentito niente del genere".</p></div></div>
+        <div class="step" data-reveal><span class="step-num" aria-hidden="true">04</span><div><h3 class="step-name">Fototerapia LED</h3><p class="step-desc">Luce a lunghezze d'onda specifiche riattiva i follicoli dormienti, stimola la produzione di cheratina e favorisce un cuoio capelluto più sano e attivo. Indolore, silenziosa. Funziona.</p></div></div>
+        <div class="step" data-reveal><span class="step-num" aria-hidden="true">05</span><div><h3 class="step-name">Maschera nutriente e chiusura</h3><p class="step-desc">Una maschera concentrata viene massaggiata in profondità. La sessione si chiude con un rituale di respirazione guidata. Quando ti alzi, la testa è leggera. Il mondo può aspettare ancora un po'.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="risultati" aria-label="I risultati dell'Head Spa Premium">
+    <div class="container">
+      <div class="risultati-header" data-reveal>
+        <span class="label label--gold" style="display:block;margin-bottom:1rem;">Risultati</span>
+        <h2 class="risultati-title">Cosa puoi aspettarti</h2>
+        <p class="risultati-sub">Effetti che si sentono subito, e che con il tempo diventano strutturali, per la testa e per i capelli.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" data-reveal><p class="timeline-marker">Dopo 1 seduta</p><h3 class="timeline-heading">Leggerezza<br>profonda</h3><p class="timeline-desc">Sensazione immediata di leggerezza alla testa che dura 2-3 giorni. Capelli visibilmente più lucidi. Tensione sciolta. Sonno più profondo nella notte successiva.</p></div>
+        <div class="timeline-item" data-reveal data-delay="1"><p class="timeline-marker">Dopo 4 sedute</p><h3 class="timeline-heading">Il cuoio capelluto<br>si ribilancia</h3><p class="timeline-desc">Il cuoio capelluto ritrova il suo equilibrio naturale. I capelli crescono più forti. La caduta stagionale si riduce. Lo stress smette di scaricarsi sulla testa.</p></div>
+        <div class="timeline-item" data-reveal data-delay="2"><p class="timeline-marker">Mantenimento mensile</p><h3 class="timeline-heading">Benessere<br>strutturale</h3><p class="timeline-desc">Meno caduta, più densità percepita, cuoio capelluto in salute. L'Head Spa diventa il rituale mensile che non riesci più a toglierti. Perché sai come ti senti dopo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="per-chi section" aria-label="Per chi è indicata l'Head Spa Premium">
+    <div class="container"><div class="per-chi-inner">
+      <h2 class="per-chi-title" data-reveal>È il trattamento<br>giusto per te?</h2>
+      <div data-reveal>
+        <p class="per-chi-col-label">Perfetto per</p>
+        <ul class="per-chi-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Stress cronico e tensione muscolare alla testa e alla nuca</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Cuoio capelluto grasso, secco o con prurito</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Caduta stagionale o diradamento diffuso</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Chi ha semplicemente bisogno di staccare per davvero</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>Come regalo per chi ami — un'esperienza indimenticabile</li>
+        </ul>
+      </div>
+      <div data-reveal data-delay="1">
+        <p class="per-chi-col-label">Meglio valutare prima</p>
+        <ul class="per-chi-list">
+          <li class="caution"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>Infezioni attive del cuoio capelluto (forfora severa, psoriasi in fase acuta)</li>
+          <li class="caution"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>Ferite o irritazioni aperte sul cuoio capelluto</li>
+        </ul>
+      </div>
+      <p class="per-chi-note" data-reveal>Vuoi regalarlo a qualcuno? Scrivici — prepariamo un voucher regalo personalizzato con un messaggio da te.</p>
+    </div></div>
+  </section>
+
+    <!-- FAQ -->
+  <section class="faq section" id="faq" aria-label="Domande frequenti">
+    <div class="container container--narrow">
+      <div data-reveal>
+        <span class="label label--gold" style="display:block;margin-bottom:.75rem;">Domande frequenti</span>
+        <h2 class="faq-title">Quello che ci chiedono di più</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" data-reveal>
+          <summary>Quanto dura una seduta?</summary>
+          <p class="faq-answer">Un’ora esatta. Non un’ora che scorre.</p>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>È adatta anche per la caduta dei capelli?</summary>
+          <p class="faq-answer">Sì. La fototerapia LED stimola i follicoli e riduce la caduta stagionale. Risultati visibili dopo 3–4 sedute.</p>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>Posso lavarmi i capelli subito dopo?</summary>
+          <p class="faq-answer">Meglio aspettare 24 ore per permettere ai principi attivi di agire in profondità.</p>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>Con che frequenza tornare?</summary>
+          <p class="faq-answer">Una volta al mese per il benessere strutturale. Per caduta o cuoio capelluto problematico, meglio iniziare con 4 sedute ravvicinate.</p>
+        </details>
+        <details class="faq-item" data-reveal>
+          <summary>Quanto costa?</summary>
+          <p class="faq-answer">Scrivici. Se vuoi regalarlo, prepariamo anche un voucher.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-finale" id="prenota" aria-label="Prenota Head Spa Premium">
+    <div class="container container--narrow">
+      <p class="label cta-finale-label" data-reveal>Passo successivo</p>
+      <h2 class="cta-finale-title" data-reveal data-delay="1">Un'ora tua.<br>Solo tua.</h2>
+      <p class="cta-finale-sub" data-reveal data-delay="2">Scrivici su WhatsApp: ti rispondiamo entro due ore e prenotiamo la tua seduta. O dicci se è un regalo per qualcuno a cui vuoi bene.</p>
+      <div class="cta-finale-actions" data-reveal data-delay="3">
+        <a href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20l'Head%20Spa%20Premium" class="btn btn--primary" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Prenota su WhatsApp</a>
+        <a href="#faq" class="btn btn--ghost-dark">Hai ancora dubbi? Leggi le FAQ</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" aria-label="Piè di pagina"><div class="container"><div class="footer-inner"><a href="/" class="footer-brand">Lumia</a><p class="footer-legal">&copy; 2025 LUMIA Face Lab · P.IVA 00000000000 · <a href="privacy-policy.html">Privacy Policy</a> · Via Vico Traversa 1, Bari</p></div></div></footer>
+<a href="https://wa.me/393401234567?text=Ciao,%20vorrei%20informazioni%20sull'Head%20Spa%20Premium" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Prenota su WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<script>(function(){'use strict';const K='lumia_cookie_consent',o=document.getElementById('cookieOverlay');function d(ok){localStorage.setItem(K,JSON.stringify({ts:new Date().toISOString(),accepted:ok}));o.classList.add('hidden');document.body.classList.remove('no-scroll');}if(localStorage.getItem(K)){o.classList.add('hidden');document.body.classList.remove('no-scroll');}document.getElementById('cookieAccept').addEventListener('click',()=>d(true));document.getElementById('cookieReject').addEventListener('click',()=>d(false));const nav=document.getElementById('siteNav'),toggle=document.getElementById('navToggle'),menu=document.getElementById('navMenu');let open=false;function openMenu(){open=true;toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','Chiudi menu');menu.classList.add('open');document.body.classList.add('no-scroll');}function closeMenu(){open=false;toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Apri menu');menu.classList.remove('open');document.body.classList.remove('no-scroll');}toggle.addEventListener('click',()=>open?closeMenu():openMenu());document.querySelectorAll('.js-menu-link').forEach(l=>l.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open)closeMenu();});window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});const els=document.querySelectorAll('[data-reveal]');if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -48px 0px'});els.forEach(el=>obs.observe(el));}else{els.forEach(el=>el.classList.add('revealed'));}document.querySelectorAll('a[href^="#"]').forEach(l=>l.addEventListener('click',function(e){const t=document.getElementById(this.getAttribute('href').slice(1));if(!t)return;e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-8,behavior:'smooth'});}));})();</script>
+</body>
+</html>

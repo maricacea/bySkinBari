@@ -1,0 +1,12 @@
+# Claude / dev
+.agents/
+server.py
+skills-lock.json
+
+# Lead magnet (non parte del sito pubblico)
+lead-magnet-*.html
+
+# Immagini sorgente e backup
+images/trattamenti/_*.png
+images/trattamenti/anti_age/original/
+images/trattamenti/hydra/original/

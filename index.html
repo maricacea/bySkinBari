@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMIA Face Lab — Trattamenti Viso Professionali · Bari</title>
+  <meta name="description" content="LUMIA Face Lab è il primo centro estetico di Bari dedicato esclusivamente al viso. Trattamenti personalizzati firmati Marica, Face Specialist. Prenota su WhatsApp.">
+  <meta property="og:title" content="LUMIA Face Lab — Bari">
+  <meta property="og:description" content="Il primo Face Lab di Bari. Il viso. La nostra unica specializzazione.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+  /* ============================================================
+     DESIGN TOKENS
+  ============================================================ */
+  :root {
+    /* Brand */
+    --gold:       #B8965A;
+    --gold-deep:  #8B6B2E;
+    --gold-pale:  #E8D5B0;
+    --gold-mist:  rgba(184,150,90,.08);
+
+    /* Surfaces */
+    --cream:      #F8F4EF;
+    --cream-warm: #EDE7DF;
+    --surface:    #FDFAF6;
+
+    /* Ink */
+    --ink:        #1A1814;
+    --ink-soft:   #4A4540;
+    --ink-muted:  #7A7570;
+
+    --dark:       #272420;
+    --dark-lift:  #302C28;
+
+    /* Fonts */
+    --f-display: 'Cormorant', Georgia, 'Times New Roman', serif;
+    --f-body:    'Outfit', system-ui, -apple-system, sans-serif;
+
+    /* Easing */
+    --ease:     cubic-bezier(.16,1,.3,1);
+    --ease-in:  cubic-bezier(.45,0,.55,1);
+    --fast:     180ms;
+    --base:     380ms;
+    --slow:     680ms;
+
+    /* Layout */
+    --max-w:  1400px;
+    --pad-x:  clamp(1.25rem, 5vw, 3rem);
+    --pad-y:  clamp(4rem, 9vw, 8rem);
+    --gap:    clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* ============================================================
+     RESET & BASE
+  ============================================================ */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-optical-sizing: auto;
+  }
+
+  body {
+    font-family: var(--f-body);
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body.no-scroll { overflow: hidden; }
+
+  img { max-width: 100%; display: block; }
+  a   { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  h1,h2,h3,h4 {
+    font-family: var(--f-display);
+    font-weight: 300;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  /* ============================================================
+     SKIP LINK (accessibility)
+  ============================================================ */
+  .skip-link {
+    position: absolute; top: -100%; left: 1rem;
+    background: var(--ink); color: var(--surface);
+    padding: .5rem 1rem; font-size: .875rem;
+    z-index: 9999; transition: top var(--fast);
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* ============================================================
+     TYPOGRAPHY UTILITIES
+  ============================================================ */
+  .label {
+    font-family: var(--f-body);
+    font-size: .6875rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .label--gold { color: var(--gold-deep); }
+
+  /* ============================================================
+     LAYOUT
+  ============================================================ */
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+  }
+  .container--narrow { max-width: 920px; }
+
+  .section { padding: var(--pad-y) 0; }
+
+  /* ============================================================
+     BUTTONS
+  ============================================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .625rem;
+    font-family: var(--f-body);
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .9375rem 1.875rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background var(--base) var(--ease),
+      color var(--base) var(--ease),
+      border-color var(--base) var(--ease),
+      transform var(--fast);
+  }
+  .btn:active { transform: scale(.97); }
+
+  .btn--primary {
+    background: var(--gold);
+    color: var(--ink);
+    border: 1px solid var(--gold);
+  }
+  .btn--primary:hover { background: var(--gold-deep); border-color: var(--gold-deep); }
+
+  .btn--dark {
+    background: var(--ink);
+    color: var(--surface);
+    border: 1px solid var(--ink);
+  }
+  .btn--dark:hover { background: var(--dark-lift); }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .btn--outline:hover { background: var(--ink); color: var(--surface); }
+
+  .btn--ghost-light {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid rgba(26,24,20,.25);
+  }
+  .btn--ghost-light:hover { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+
+  .btn svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+  /* ============================================================
+     COOKIE BANNER
+  ============================================================ */
+  .cookie-overlay {
+    position: fixed; inset: 0;
+    background: rgba(26,24,20,.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 1.5rem;
+    transition: opacity var(--slow) var(--ease), visibility var(--slow);
+  }
+  @media (min-width: 640px) { .cookie-overlay { align-items: center; } }
+
+  .cookie-overlay.hidden {
+    opacity: 0; visibility: hidden; pointer-events: none;
+  }
+
+  .cookie-modal {
+    background: var(--surface);
+    max-width: 460px; width: 100%;
+    padding: 2.25rem 2rem 1.75rem;
+    animation: slideUp .5s var(--ease) both;
+  }
+
+  @keyframes slideUp {
+    from { opacity:0; transform:translateY(1.5rem); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .cookie-modal-brand {
+    font-family: var(--f-body);
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase;
+    display: inline-block;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: .25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .cookie-modal p {
+    font-size: .875rem; color: var(--ink-soft);
+    line-height: 1.7; margin-bottom: .625rem;
+  }
+
+  .cookie-modal a {
+    color: var(--gold-deep);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-actions {
+    display: flex; gap: .75rem; margin-top: 1.75rem;
+  }
+  .cookie-actions .btn {
+    flex: 1; justify-content: center;
+    padding: .8125rem 1rem;
+  }
+
+  /* ============================================================
+     NAVIGATION
+  ============================================================ */
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 900;
+    padding: 1.75rem 0;
+    transition:
+      background var(--base) var(--ease),
+      padding var(--base) var(--ease),
+      box-shadow var(--base) var(--ease);
+  }
+
+  .site-nav.scrolled {
+    background: rgba(248,244,239,.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 1.125rem 0;
+    box-shadow: 0 1px 0 rgba(26,24,20,.07);
+  }
+
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--f-body);
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink);
+    transition: opacity var(--fast);
+  }
+  .nav-logo:hover { opacity: .65; }
+
+  .nav-toggle {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 5px; width: 2.5rem; height: 2.5rem;
+    padding: .5rem; margin-right: -.5rem;
+    background: none; border: none; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle span {
+    display: block; width: 1.5rem; height: 1.5px;
+    background: var(--ink);
+    transition: transform var(--base) var(--ease), opacity var(--fast);
+    transform-origin: center;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity:0; transform: scaleX(0); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* Full-screen menu */
+  .nav-menu {
+    position: fixed; inset: 0;
+    background: var(--dark);
+    z-index: 800;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: clamp(2rem,8vw,5rem) var(--pad-x);
+    opacity: 0; visibility: hidden;
+    transition: opacity var(--slow) var(--ease), visibility var(--slow);
+  }
+  .nav-menu.open { opacity:1; visibility:visible; }
+
+  .nav-menu-list { list-style: none; margin-bottom: 3rem; }
+
+  .nav-menu-list a {
+    display: block;
+    font-family: var(--f-display);
+    font-size: clamp(2.5rem,7vw,5.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(237,231,223,.8);
+    padding: .2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    transition: color var(--base) var(--ease), padding-left var(--base) var(--ease);
+  }
+  .nav-menu-list a:hover { color: var(--gold-pale); padding-left: .75rem; }
+
+  .nav-menu-footer {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .nav-contact-info {
+    font-size: .8125rem;
+    color: rgba(237,231,223,.4);
+    letter-spacing: .05em;
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  .hero {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: .875rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    display: block; width: 2rem; height: 1px;
+    background: var(--gold); flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-family: var(--f-display);
+    font-size: clamp(3.5rem, 7.5vw, 7rem);
+    font-weight: 300; font-style: italic;
+    line-height: .92; letter-spacing: -.02em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .hero-divider {
+    width: 3rem; height: 1px;
+    background: var(--gold-pale);
+    margin-bottom: 1.5rem;
+    opacity: .6;
+  }
+
+  .hero-tagline {
+    font-size: clamp(.9375rem,1.4vw,1.0625rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 42ch;
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex; gap: .75rem; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+  }
+
+  .hero-scroll {
+    display: flex;
+    position: absolute; bottom: 2rem;
+    left: 50%; transform: translateX(-50%);
+    flex-direction: column; align-items: center; gap: .625rem;
+    font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .hero-scroll-line {
+    width: 1px; height: 3rem;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2.4s var(--ease) infinite;
+  }
+  @keyframes scrollPulse {
+    0%,100% { transform: scaleY(1); opacity:.9; }
+    50%      { transform: scaleY(.5); opacity:.3; }
+  }
+
+  /* Hero image panel */
+  .hero-panel {
+    position: relative;
+    background: var(--cream-warm);
+    overflow: hidden;
+    min-height: 55vh;
+  }
+  @media (min-width: 900px) { .hero-panel { min-height: 100dvh; } }
+
+  .hero-panel-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center center;
+    display: block;
+  }
+
+  .hero-panel-caption {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .hero-panel-name {
+    background: rgba(26,24,20,.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: .75rem 1rem;
+  }
+  .hero-panel-name p {
+    font-size: .6875rem; letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(237,231,223,.7);
+    margin-bottom: .125rem;
+  }
+  .hero-panel-name strong {
+    font-size: .875rem; font-weight: 500;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--gold-pale);
+  }
+
+  /* ============================================================
+     SECTION MARKER — etichetta + linea che identifica la sezione
+  ============================================================ */
+  .section-marker {
+    padding: 0 var(--pad-x);
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .section-marker-inner {
+    display: flex; align-items: center; gap: 1.25rem;
+    border-top: 1px solid rgba(26,24,20,.1);
+    padding-top: clamp(1.5rem,3vw,2.25rem);
+    margin-top: clamp(0rem,0vw,0rem);
+  }
+  .section-marker-label {
+    font-family: var(--f-body);
+    font-size: .5rem; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold-deep); white-space: nowrap;
+  }
+  .section-marker-line {
+    flex: 1; height: 1px;
+    background: rgba(26,24,20,.08);
+  }
+
+  /* ============================================================
+     MANIFESTO STRIP
+  ============================================================ */
+  .manifesto {
+    background: var(--cream-warm);
+    padding: clamp(3.5rem,7vw,6.5rem) 0;
+  }
+
+  .manifesto-inner {
+    display: flex; flex-direction: column;
+    align-items: flex-start; gap: 1.25rem;
+  }
+
+  .manifesto-eyebrow { color: var(--gold-deep); }
+
+  .manifesto-text {
+    font-family: var(--f-display);
+    font-size: clamp(1.875rem,4.5vw,4rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink);
+    line-height: 1.15; max-width: 24ch;
+  }
+
+  .manifesto-text em {
+    font-style: normal; font-weight: 600;
+    color: var(--gold-deep);
+  }
+
+  .manifesto-rule {
+    width: 3.5rem; height: 1px;
+    background: var(--gold); opacity: .35;
+    margin-top: .5rem;
+  }
+
+  /* ============================================================
+     ABOUT / CHI SIAMO
+  ============================================================ */
+  .about { background: var(--cream-warm); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: clamp(3rem,6vw,5rem); align-items: center;
+  }
+  @media (min-width: 900px) {
+    .about-grid { grid-template-columns: 5fr 7fr; }
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+
+  .about-img {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: contain; object-position: center bottom;
+  }
+
+  .about-img-badge {
+    position: absolute; bottom: -1.25rem; right: -1rem;
+    background: var(--gold);
+    padding: 1rem 1.25rem;
+  }
+  @media (min-width: 900px) { .about-img-badge { right: -1.5rem; } }
+
+  .about-img-badge p {
+    font-size: .6875rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink); line-height: 1.5;
+  }
+
+  .about-content { padding-top: 1.5rem; }
+  @media (min-width: 900px) { .about-content { padding-top: 0; } }
+
+  .about-pullquote {
+    font-family: var(--f-display);
+    font-size: clamp(1.5rem,3vw,2.625rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink);
+    line-height: 1.2;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--cream-warm);
+    margin-bottom: 2rem;
+  }
+
+  .about-text {
+    font-size: .9375rem; color: var(--ink-soft);
+    line-height: 1.85; margin-bottom: 2.25rem;
+  }
+
+  /* ============================================================
+     TREATMENTS
+  ============================================================ */
+  .treatments { background: var(--cream); }
+
+  .treatments-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  .treatments-manifesto {
+    font-family: var(--f-display);
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink); line-height: 1.2;
+    max-width: 28ch;
+  }
+  .treatments-manifesto em {
+    font-style: normal; font-weight: 600;
+    color: var(--gold-deep);
+  }
+
+  .treatments-title {
+    font-family: var(--f-display);
+    font-size: clamp(2rem,5vw,4rem);
+    font-weight: 300;
+  }
+
+  /* Alternating grid */
+  .treatment-item {
+    display: grid; grid-template-columns: 1fr;
+    border-top: 1px solid var(--cream-warm);
+    transition: background var(--base) var(--ease);
+  }
+  .treatment-item:last-child { border-bottom: 1px solid var(--cream-warm); }
+
+  @media (min-width: 768px) {
+    .treatment-item {
+      grid-template-columns: 1fr 1fr;
+      min-height: 440px;
+    }
+    .treatment-item:nth-child(even) .treatment-img-wrap { order: -1; }
+  }
+
+  .treatment-img-wrap {
+    position: relative; overflow: hidden;
+    background: var(--cream-warm); min-height: 260px;
+  }
+  @media (min-width: 768px) { .treatment-img-wrap { min-height: unset; } }
+
+  .treatment-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform var(--slow) var(--ease);
+  }
+  .treatment-item:hover .treatment-img { transform: scale(1.04); }
+
+  .treatment-body {
+    padding: clamp(2rem,5vw,3.5rem);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .treatment-number {
+    font-family: var(--f-display);
+    font-size: 6rem; font-weight: 300;
+    color: var(--cream-warm); line-height: 1;
+    margin-bottom: -.75rem;
+    user-select: none; pointer-events: none;
+  }
+
+  .treatment-tag {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .6875rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: .875rem;
+  }
+  .treatment-tag::before {
+    content: ''; display: block;
+    width: 1.25rem; height: 1px; background: var(--gold);
+  }
+
+  .treatment-name {
+    font-family: var(--f-display);
+    font-size: clamp(1.75rem,3.5vw,2.875rem);
+    font-weight: 400;
+    color: var(--ink); margin-bottom: .875rem;
+  }
+
+  .treatment-desc {
+    font-size: .9375rem; color: var(--ink-soft);
+    line-height: 1.75; margin-bottom: 2rem;
+    max-width: 40ch;
+  }
+
+  /* ============================================================
+     TREATMENT CARDS
+  ============================================================ */
+  .treatments-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  @media (min-width: 640px) {
+    .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .treatments-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .treatment-card {
+    background: var(--surface);
+    border: 1px solid rgba(184,150,90,.28);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    transition:
+      border-color var(--base) var(--ease),
+      transform var(--base) var(--ease),
+      box-shadow var(--base) var(--ease);
+  }
+  .treatment-card:hover {
+    border-color: rgba(184,150,90,.7);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(26,24,20,.07);
+  }
+
+  .treatment-card-img-wrap {
+    position: relative;
+    padding: 1.25rem 1.25rem 0;
+    background: var(--cream);
+    display: flex; align-items: flex-end; justify-content: center;
+    height: 370px; overflow: hidden;
+  }
+
+  .treatment-card-number {
+    position: absolute; bottom: .5rem; right: 1rem;
+    font-family: var(--f-display);
+    font-size: 5rem; font-weight: 300;
+    color: rgba(26,24,20,.05); line-height: 1;
+    user-select: none; pointer-events: none;
+  }
+
+  .treatment-card-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--slow) var(--ease);
+  }
+  .treatment-card:hover .treatment-card-img { transform: scale(1.04); }
+
+  /* ── BEFORE/AFTER SLIDER ── */
+  .ba-slider {
+    position: absolute; inset: 0;
+    overflow: hidden; cursor: col-resize;
+    user-select: none; -webkit-user-select: none;
+  }
+  .ba-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain; object-position: center center;
+    pointer-events: none; display: block;
+  }
+  .ba-after-img {
+    z-index: 2;
+    clip-path: inset(0 0 0 50%);
+  }
+  .ba-handle {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; background: white; z-index: 3;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ba-handle-btn {
+    width: 36px; height: 36px; background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.25); gap: 1px; flex-shrink: 0;
+  }
+  .ba-handle-btn svg { width: 11px; height: 11px; color: var(--ink); stroke: currentColor; fill: none; }
+  .ba-labels {
+    position: absolute; bottom: 10px; left: 0; right: 0;
+    display: flex; justify-content: space-between;
+    padding: 0 10px; z-index: 4; pointer-events: none;
+  }
+  .ba-label {
+    font-family: var(--f-body); font-size: .575rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: white; background: rgba(26,24,20,.45);
+    padding: 3px 7px; backdrop-filter: blur(4px);
+  }
+
+  .treatment-card-body {
+    padding: 1.75rem;
+    flex: 1; display: flex; flex-direction: column;
+    border-top: 1px solid rgba(26,24,20,.06);
+  }
+
+  .treatment-card-tag {
+    font-size: .625rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--gold-deep); margin-bottom: .75rem;
+  }
+
+  .treatment-card-name {
+    font-family: var(--f-display);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 400; color: var(--ink);
+    margin-bottom: .875rem; line-height: 1.1;
+  }
+
+  .treatment-card-desc {
+    font-size: .9rem; color: var(--ink-soft);
+    line-height: 1.75; margin-bottom: 1.5rem; flex: 1;
+  }
+
+  .treatment-card-cta {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .6875rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold-deep); align-self: flex-start;
+    transition: gap var(--base) var(--ease), color var(--fast);
+  }
+  .treatment-card-cta:hover { color: var(--ink); gap: .875rem; }
+  .treatment-card-cta svg { width: .875rem; height: .875rem; flex-shrink: 0; }
+
+  .treatments-divider {
+    display: flex; align-items: center; gap: 1.75rem;
+    margin: clamp(1.5rem,3vw,2.5rem) 0 clamp(2.5rem,5vw,4rem);
+  }
+
+  .treatments-divider-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: .55;
+  }
+
+  .treatments-divider-text {
+    font-family: var(--f-display);
+    font-size: clamp(1.0625rem, 2vw, 1.4375rem);
+    font-style: italic; font-weight: 300;
+    color: var(--ink-soft);
+    text-align: center; flex-shrink: 0;
+    max-width: 36ch;
+  }
+
+  .treatments-divider-text em {
+    font-style: normal; font-weight: 600;
+    color: var(--gold-deep);
+  }
+
+  /* ============================================================
+     BOOKING STRIP
+  ============================================================ */
+  .booking-strip {
+    background: var(--cream-warm);
+    padding: clamp(4rem,8vw,6.5rem) 0;
+    text-align: center;
+  }
+
+  .booking-strip-eyebrow {
+    color: var(--gold-deep);
+    margin-bottom: 1.25rem;
+  }
+
+  .booking-strip-title {
+    font-family: var(--f-display);
+    font-size: clamp(2rem,5.5vw,4.75rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink);
+    line-height: 1.05; margin-bottom: .75rem;
+  }
+
+  .booking-strip-sub {
+    font-size: 1rem; font-weight: 300;
+    color: var(--ink-muted);
+    margin-bottom: 2.75rem;
+  }
+
+  .booking-strip-actions {
+    display: flex; gap: .75rem;
+    justify-content: center; flex-wrap: wrap;
+  }
+
+  /* ============================================================
+     TESTIMONIALS
+  ============================================================ */
+  .testimonials { background: var(--cream); }
+
+  .testimonials-header { margin-bottom: clamp(2.5rem,5vw,4rem); }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: 1fr; gap: 0;
+  }
+  @media (min-width: 768px) {
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .testimonial-item {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--cream-warm);
+  }
+  @media (min-width: 768px) {
+    .testimonial-item:nth-child(odd)  { padding-right: 3rem; }
+    .testimonial-item:nth-child(even) { padding-left: 3rem; border-left: 1px solid var(--cream-warm); }
+  }
+
+  .testimonial-mark {
+    font-family: var(--f-display);
+    font-size: 5rem; font-weight: 300;
+    color: var(--gold); line-height: .6;
+    margin-bottom: 1.25rem; opacity: .5;
+  }
+
+  .testimonial-text {
+    font-family: var(--f-display);
+    font-size: clamp(1.0625rem,2vw,1.3125rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink);
+    line-height: 1.65; margin-bottom: 1.5rem;
+  }
+
+  .testimonial-stars {
+    color: var(--gold);
+    font-size: .75rem; letter-spacing: .15em;
+    margin-bottom: .5rem;
+  }
+
+  .testimonial-author {
+    font-size: .6875rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ============================================================
+     NEWSLETTER
+  ============================================================ */
+  .newsletter { background: var(--cream-warm); }
+
+  .newsletter-inner {
+    display: grid; grid-template-columns: 1fr;
+    gap: clamp(2rem,4vw,4rem); align-items: center;
+  }
+  @media (min-width: 768px) {
+    .newsletter-inner { grid-template-columns: 1fr 1fr; }
+  }
+
+  .newsletter-title {
+    font-family: var(--f-display);
+    font-size: clamp(1.75rem,3.5vw,2.75rem);
+    font-weight: 300; margin-bottom: .75rem;
+  }
+
+  .newsletter-desc {
+    font-size: .9375rem; color: var(--ink-soft); line-height: 1.75;
+  }
+
+  .newsletter-form {
+    display: flex; flex-direction: column; gap: .75rem;
+  }
+  @media (min-width: 500px) { .newsletter-form { flex-direction: row; } }
+
+  .newsletter-input {
+    flex: 1;
+    padding: .9375rem 1rem;
+    font-family: var(--f-body); font-size: .9375rem;
+    color: var(--ink); background: var(--surface);
+    border: 1px solid rgba(26,24,20,.12);
+    outline: none;
+    transition: border-color var(--fast);
+  }
+  .newsletter-input::placeholder { color: var(--ink-muted); }
+  .newsletter-input:focus { border-color: var(--gold); }
+
+  .newsletter-note {
+    font-size: .75rem; color: var(--ink-muted); margin-top: .375rem;
+  }
+
+  .newsletter-success {
+    display: none;
+    font-family: var(--f-display);
+    font-size: 1.25rem; font-style: italic;
+    color: var(--ink); padding: 1rem 0;
+  }
+
+  /* ============================================================
+     INFO / DOVE SIAMO
+  ============================================================ */
+  .info { background: var(--cream); }
+
+  .info-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: clamp(3rem,5vw,5rem);
+  }
+  @media (min-width: 768px) {
+    .info-grid { grid-template-columns: 1fr 1fr; gap: 5rem; }
+  }
+
+  .info-block-label {
+    font-size: .6875rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.25rem; padding-bottom: .875rem;
+    border-bottom: 1px solid var(--cream-warm);
+  }
+
+  .info-block-title {
+    font-family: var(--f-display);
+    font-size: clamp(1.5rem,3vw,2.5rem);
+    font-weight: 300; margin-bottom: 1rem;
+  }
+
+  .info-address {
+    font-size: 1.0625rem; color: var(--ink-soft); line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-link {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--gold-deep);
+    text-decoration: underline; text-underline-offset: 3px;
+    transition: color var(--fast);
+  }
+  .info-link:hover { color: var(--ink); }
+
+  .hours-list { display: flex; flex-direction: column; }
+
+  .hour-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .6875rem 0;
+    border-bottom: 1px solid var(--cream-warm);
+    font-size: .9375rem;
+  }
+  .hour-row:first-child { border-top: 1px solid var(--cream-warm); }
+  .hour-row.is-open .hour-time { color: var(--gold-deep); font-weight: 500; }
+  .hour-row.is-closed { opacity: .38; }
+  .hour-day { color: var(--ink-soft); }
+
+  .info-cta {
+    margin-top: clamp(3rem,5vw,4rem);
+    padding: clamp(2.5rem,4vw,3.5rem);
+    background: transparent;
+    border: 1px solid rgba(26,24,20,.12);
+    display: flex; flex-direction: column;
+    align-items: flex-start; gap: 1.5rem;
+  }
+  @media (min-width: 600px) {
+    .info-cta { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+
+  .info-cta-text {
+    font-family: var(--f-display);
+    font-size: clamp(1.25rem,2.5vw,1.875rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink); line-height: 1.25;
+  }
+  .info-cta-sub {
+    font-size: .875rem; font-weight: 300;
+    color: var(--ink-muted);
+    margin-top: .375rem;
+  }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  .site-footer {
+    background: var(--cream-warm);
+    padding: clamp(3rem,6vw,5rem) 0 2rem;
+    border-top: 1px solid rgba(26,24,20,.1);
+  }
+
+  .footer-top {
+    display: grid; grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(26,24,20,.08);
+  }
+  @media (min-width: 768px) {
+    .footer-top { grid-template-columns: 2fr 1fr 1fr; }
+  }
+
+  .footer-brand {
+    font-family: var(--f-display);
+    font-size: clamp(2.5rem,5vw,4rem);
+    font-weight: 300; font-style: italic;
+    color: var(--ink); margin-bottom: .875rem; line-height: 1;
+  }
+
+  .footer-tagline {
+    font-size: .875rem; font-weight: 300;
+    color: var(--ink-muted); line-height: 1.65;
+    max-width: 30ch;
+  }
+
+  .footer-col-label {
+    font-size: .625rem; font-weight: 600;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+
+  .footer-links a {
+    font-size: .9375rem;
+    color: var(--ink-soft);
+    transition: color var(--fast);
+  }
+  .footer-links a:hover { color: var(--gold-deep); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .footer-legal {
+    font-size: .6875rem;
+    color: var(--ink-muted);
+  }
+  .footer-legal a {
+    color: var(--ink-soft);
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+  .footer-legal a:hover { color: var(--ink); }
+
+  /* ============================================================
+     WHATSAPP FAB
+  ============================================================ */
+  .whatsapp-fab {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    z-index: 800;
+    width: 3.25rem; height: 3.25rem;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(37,211,102,.28);
+    transition: transform var(--fast), box-shadow var(--fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .whatsapp-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 22px rgba(37,211,102,.38);
+  }
+  .whatsapp-fab:active { transform: scale(.94); }
+  .whatsapp-fab svg { width: 1.5rem; height: 1.5rem; fill: #fff; }
+
+  /* ============================================================
+     SCROLL REVEAL ANIMATIONS
+  ============================================================ */
+  [data-reveal] {
+    opacity: 0; transform: translateY(1.5rem);
+    transition: opacity .75s var(--ease), transform .75s var(--ease);
+  }
+  [data-reveal="left"]  { transform: translateX(-1.5rem); }
+  [data-reveal="right"] { transform: translateX(1.5rem); }
+  [data-reveal].revealed { opacity:1; transform: none; }
+
+  [data-delay="1"] { transition-delay: 80ms; }
+  [data-delay="2"] { transition-delay: 160ms; }
+  [data-delay="3"] { transition-delay: 240ms; }
+  [data-delay="4"] { transition-delay: 320ms; }
+  [data-delay="5"] { transition-delay: 400ms; }
+
+  /* ============================================================
+     UTILITIES
+  ============================================================ */
+  .sr-only {
+    position:absolute; width:1px; height:1px;
+    padding:0; margin:-1px; overflow:hidden;
+    clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      transition-duration: .01ms !important;
+    }
+    [data-reveal] { opacity:1; transform:none; }
+  }
+  </style>
+</head>
+<body class="no-scroll">
+
+<a class="skip-link" href="#main">Vai al contenuto principale</a>
+
+<!-- ============================================================
+     COOKIE BANNER
+============================================================ -->
+<div class="cookie-overlay" id="cookieOverlay" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
+  <div class="cookie-modal">
+    <span class="cookie-modal-brand">LUMIA</span>
+    <p id="cookieTitle" style="font-size:.9375rem;color:var(--ink);font-weight:500;margin-bottom:.625rem;">La tua privacy conta</p>
+    <p>
+      Utilizziamo cookie tecnici per migliorare la tua esperienza e cookie analitici per capire come viene usato il sito.
+      Puoi accettare tutti o rifiutare i cookie non necessari.
+    </p>
+    <p>
+      <a href="privacy-policy.html">Leggi la Privacy Policy</a>
+    </p>
+    <div class="cookie-actions">
+      <button class="btn btn--primary" id="cookieAccept" type="button">Accetta tutti</button>
+      <button class="btn btn--outline" id="cookieReject" type="button">Solo tecnici</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<header>
+  <nav class="site-nav" id="siteNav" aria-label="Navigazione principale">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo" aria-label="LUMIA Face Lab — Homepage">LUMIA</a>
+
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-controls="navMenu"
+        aria-expanded="false"
+        aria-label="Apri menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Full-screen menu -->
+  <div class="nav-menu" id="navMenu" role="navigation" aria-label="Menu principale">
+    <ul class="nav-menu-list">
+      <li><a href="#trattamenti" class="js-menu-link">Trattamenti</a></li>
+      <li><a href="#chi-siamo" class="js-menu-link">Chi Siamo</a></li>
+      <li><a href="#newsletter" class="js-menu-link">Newsletter</a></li>
+      <li><a href="#dove-siamo" class="js-menu-link">Dove Siamo</a></li>
+    </ul>
+    <div class="nav-menu-footer">
+      <a
+        href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20un%20trattamento"
+        class="btn btn--primary"
+        target="_blank" rel="noopener"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Prenota ora
+      </a>
+      <p class="nav-contact-info">Via Vico Traversa 1 · Bari</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main">
+
+  <!-- HERO --------------------------------------------------- -->
+  <section class="hero" id="hero" aria-label="Benvenuta in LUMIA Face Lab">
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-reveal>
+        <span style="font-family:var(--f-display);font-style:italic;font-size:1.0625rem;font-weight:300;letter-spacing:.04em;color:var(--ink-muted);">di Marica Cea</span>
+      </div>
+
+      <h1 class="hero-title" data-reveal data-delay="1">
+        Il primo<br>
+        Face Lab<br>
+        di Bari
+      </h1>
+
+      <div class="hero-divider" data-reveal data-delay="2"></div>
+
+      <p class="hero-tagline" data-reveal data-delay="3">
+        Il viso. La nostra unica specializzazione.<br>
+        Il tuo unico motivo per sceglierci.
+      </p>
+
+      <div class="hero-actions" data-reveal data-delay="4">
+        <a
+          href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20un%20trattamento%20viso"
+          class="btn btn--primary"
+          target="_blank" rel="noopener"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Contattaci
+        </a>
+        <a href="#dove-siamo" class="btn btn--outline">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+          Dove siamo
+        </a>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ABOUT / CHI SIAMO ------------------------------------ -->
+  <section class="about section" id="chi-siamo" aria-label="Chi siamo">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-img-wrap" data-reveal="left">
+          <img
+            class="about-img"
+            src="https://i.ibb.co/LXQ7ZqkF/1000045684-removebg-preview.png"
+            alt="Marica, Fondatrice e Face Specialist di LUMIA Face Lab Bari"
+            loading="lazy"
+          >
+          <div class="about-img-badge">
+            <p>Face Specialist<br>certificata · Bari</p>
+          </div>
+        </div>
+
+        <div class="about-content" data-reveal="right">
+          <span class="label" style="display:block;margin-bottom:1.5rem;">Chi sono</span>
+          <p class="about-pullquote">
+            "Ho deciso di dedicarmi solo al viso perché penso che meriti il meglio."
+          </p>
+          <p class="about-text">
+            Sono Marica, Face Specialist. Ogni cliente che entra da LUMIA porta con sé una storia diversa — una pelle diversa, esigenze diverse, obiettivi diversi. Per questo non esistono protocolli standard: ogni trattamento viene costruito su misura, seduta per seduta.
+          </p>
+          <p class="about-text">
+            LUMIA nasce da una convinzione semplice: il viso merita attenzione esclusiva, competenza specializzata, e il tempo che richiede. Non siamo un centro che fa di tutto. Facciamo una cosa sola, e la facciamo bene.
+          </p>
+          <a
+            href="https://wa.me/393401234567?text=Ciao%20Marica,%20vorrei%20saperne%20di%20più%20sui%20tuoi%20trattamenti"
+            class="btn btn--dark"
+            target="_blank" rel="noopener"
+          >
+            Scrivimi direttamente
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TREATMENTS ------------------------------------------- -->
+  <section class="treatments section" id="trattamenti" aria-label="I nostri trattamenti">
+    <div class="container">
+      <div class="treatments-header" data-reveal>
+        <span class="label">Cosa offriamo</span>
+        <p class="treatments-manifesto">
+          Non applichiamo trattamenti<br><em>Li costruiamo su di te</em>
+        </p>
+      </div>
+
+      <div class="treatments-divider" data-reveal>
+        <div class="treatments-divider-line" style="background: var(--gold); opacity: .3;"></div>
+      </div>
+
+      <div class="treatments-grid">
+
+        <!-- 01 — Acne Control -->
+        <article class="treatment-card" data-reveal aria-label="Acne Control">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">01</span>
+            <div class="ba-slider" id="baSlider01" aria-label="Prima e dopo — Acne Control">
+              <img class="ba-img" src="images/trattamenti/prima_acne.png" alt="Prima del trattamento Acne Control" draggable="false" loading="lazy" style="object-fit: cover; object-position: center 20%;">
+              <img class="ba-img ba-after-img" id="baAfter01" src="images/trattamenti/dopo_acne.png" alt="Dopo il trattamento Acne Control" draggable="false" loading="lazy" style="object-fit: cover; object-position: center 20%;">
+              <div class="ba-handle" id="baHandle01">
+                <div class="ba-handle-btn">
+                  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+              </div>
+              <div class="ba-labels">
+                <span class="ba-label">Prima</span>
+                <span class="ba-label">Dopo</span>
+              </div>
+            </div>
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Trattamento medicale</span>
+            <h3 class="treatment-card-name">Acne Control</h3>
+            <p class="treatment-card-desc">
+              Pulizia medicale profonda abbinata a un protocollo antibatterico personalizzato. Risultati visibili dalla prima seduta, pelle progressivamente più libera e luminosa.
+            </p>
+            <a href="acne-control.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 02 — Hydra Glow Detox -->
+        <article class="treatment-card" data-reveal data-delay="1" aria-label="Hydra Glow Detox">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">02</span>
+            <div class="ba-slider" id="baSlider02" aria-label="Prima e dopo — Hydra Glow Detox">
+              <img class="ba-img" src="images/trattamenti/hydra/before_hydra.png" alt="Prima del trattamento Hydra Glow Detox" draggable="false" loading="lazy">
+              <img class="ba-img ba-after-img" id="baAfter02" src="images/trattamenti/hydra/after_hydra.png" alt="Dopo il trattamento Hydra Glow Detox" draggable="false" loading="lazy">
+              <div class="ba-handle" id="baHandle02">
+                <div class="ba-handle-btn">
+                  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+              </div>
+              <div class="ba-labels" aria-hidden="true">
+                <span class="ba-label">Prima</span>
+                <span class="ba-label">Dopo</span>
+              </div>
+            </div>
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Idratazione &amp; glow</span>
+            <h3 class="treatment-card-name">Hydra Glow Detox</h3>
+            <p class="treatment-card-desc">
+              60 minuti per una pelle luminosa e idratata in profondità. Rimozione delle impurità, infusione di sieri attivi ad alta concentrazione. Effetto glow immediato.
+            </p>
+            <a href="hydra-glow-detox.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 03 — Anti-Age Lifting -->
+        <article class="treatment-card" data-reveal data-delay="2" aria-label="Anti-Age Lifting">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">03</span>
+            <div class="ba-slider" id="baSlider03" aria-label="Prima e dopo — Anti-Age Lifting">
+              <img class="ba-img" src="images/trattamenti/anti_age/before_anti_age.png" alt="Prima del trattamento Anti-Age Lifting" draggable="false" loading="lazy" style="transform: translateY(-2%);">
+              <img class="ba-img ba-after-img" id="baAfter03" src="images/trattamenti/anti_age/after_anti_age.png" alt="Dopo il trattamento Anti-Age Lifting" draggable="false" loading="lazy" style="transform: translateY(-2%);">
+              <div class="ba-handle" id="baHandle03">
+                <div class="ba-handle-btn">
+                  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+              </div>
+              <div class="ba-labels">
+                <span class="ba-label">Prima</span>
+                <span class="ba-label">Dopo</span>
+              </div>
+            </div>
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Anti-aging</span>
+            <h3 class="treatment-card-name">Anti-Age Lifting</h3>
+            <p class="treatment-card-desc">
+              Radiofrequenza abbinata a correnti micro-lifting per un effetto ringiovanente immediato e progressivo. Tessuti più compatti, ovale ridefinito, luminosità ritrovata.
+            </p>
+            <a href="anti-age-lifting.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 04 — Epilazione Laser -->
+        <article class="treatment-card" data-reveal aria-label="Epilazione Laser">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">04</span>
+            <img
+              class="treatment-card-img"
+              style="transform: scale(1.1); transform-origin: bottom center;"
+              src="images/trattamenti/laser.png"
+              alt="Epilazione Laser permanente — pelle liscia e libera"
+              loading="lazy"
+            >
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Risultati permanenti</span>
+            <h3 class="treatment-card-name">Epilazione Laser</h3>
+            <p class="treatment-card-desc">
+              Tecnologia laser di ultima generazione per una riduzione permanente dei peli. Protocollo personalizzato in base al fototipo, sicuro ed efficace su tutti i tipi di pelle.
+            </p>
+            <a href="epilazione-laser.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 05 — Head Spa Premium -->
+        <article class="treatment-card" data-reveal data-delay="1" aria-label="Head Spa Premium">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">05</span>
+            <img
+              class="treatment-card-img"
+              style="transform: scale(1.2); transform-origin: bottom center;"
+              src="images/trattamenti/head_spa.png"
+              alt="Head Spa Premium — massaggio giapponese e trattamento cuoio capelluto"
+              loading="lazy"
+            >
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Relax &amp; benessere</span>
+            <h3 class="treatment-card-name">Head Spa Premium</h3>
+            <p class="treatment-card-desc">
+              Massaggio giapponese del cuoio capelluto abbinato a tecnologia LED per riattivare i follicoli e favorire il benessere profondo. Un'ora di silenzio, cura e rigenerazione totale.
+            </p>
+            <a href="head-spa-premium.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 06 — Extension Ciglia -->
+        <article class="treatment-card" data-reveal data-delay="2" aria-label="Extension Ciglia">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">06</span>
+            <img
+              class="treatment-card-img"
+              style="transform: scale(1.15); transform-origin: bottom center;"
+              src="images/trattamenti/exention_ciglia.png"
+              alt="Extension Ciglia — Volume Russo e Natural Look professionale"
+              loading="lazy"
+            >
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Sguardo &amp; bellezza</span>
+            <h3 class="treatment-card-name">Extension Ciglia</h3>
+            <p class="treatment-card-desc">
+              Volume Russo o Natural Look, applicazione ciglia per ciglia con materiali di qualità professionale. Durata fino a quattro settimane. Sguardo magnetico, ogni giorno.
+            </p>
+            <a href="extension-ciglia.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 07 — Kissum Lips -->
+        <article class="treatment-card" data-reveal data-delay="2" aria-label="Kissum Lips">
+          <div class="treatment-card-img-wrap">
+            <span class="treatment-card-number" aria-hidden="true">07</span>
+            <img
+              class="treatment-card-img"
+              style="transform: scale(1.1); transform-origin: bottom center;"
+              src="images/trattamenti/kissum-lips.png"
+              alt="Kissum Lips — labbra voluminose e definite senza filler"
+              loading="lazy"
+            >
+          </div>
+          <div class="treatment-card-body">
+            <span class="treatment-card-tag">Labbra &amp; volume</span>
+            <h3 class="treatment-card-name">Kissum Lips</h3>
+            <p class="treatment-card-desc">
+              Micropigmentazione delle labbra con pigmenti arricchiti di acido ialuronico e sieri nutrienti. Contorno più definito, volume naturale e colore diffuso — senza filler. Effetto duraturo fino a 12 mesi.
+            </p>
+            <a href="kissum-lips.html" class="treatment-card-cta">
+              Scopri il trattamento
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING STRIP ----------------------------------------- -->
+  <section class="booking-strip" id="prenota" aria-label="Prenota un trattamento">
+    <div class="container container--narrow">
+      <p class="label booking-strip-eyebrow" data-reveal>Prenotazione 24/7</p>
+      <h2 class="booking-strip-title" data-reveal data-delay="1">
+        Un messaggio ti separa<br>dal tuo glow
+      </h2>
+      <p class="booking-strip-sub" data-reveal data-delay="2">
+        Scriviamo quando vuoi — rispondiamo in meno di due ore.
+      </p>
+      <div class="booking-strip-actions" data-reveal data-delay="3">
+        <a
+          href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20un%20trattamento%20viso"
+          class="btn btn--primary"
+          target="_blank" rel="noopener"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Prenota su WhatsApp
+        </a>
+        <a href="#dove-siamo" class="btn btn--ghost-light">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+          Come raggiungerci
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS ------------------------------------------ -->
+  <section class="testimonials section" aria-label="Dicono di noi">
+    <div class="container">
+      <div class="testimonials-header">
+        <span class="label" data-reveal style="display:block;margin-bottom:1rem;">Clienti</span>
+        <h2 class="display-lg" data-reveal data-delay="1">Dicono di noi</h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-item" data-reveal>
+          <div class="testimonial-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            Marica è la prima professionista che mi ha davvero ascoltata. Niente protocolli standard: ha costruito un percorso solo per me. La mia pelle non era mai stata così in salute.
+          </p>
+          <div class="testimonial-stars" aria-label="5 stelle su 5">★★★★★</div>
+          <p class="testimonial-author">Sofia M. — Bari</p>
+        </div>
+
+        <div class="testimonial-item" data-reveal data-delay="1">
+          <div class="testimonial-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            Ho fatto l'epilazione laser in altri centri per anni. A LUMIA ho visto la differenza: consulenza seria, tecnologia aggiornata, risultati che finalmente durano. Non cerco altro.
+          </p>
+          <div class="testimonial-stars" aria-label="5 stelle su 5">★★★★★</div>
+          <p class="testimonial-author">Alessia R. — Bari</p>
+        </div>
+
+        <div class="testimonial-item" data-reveal data-delay="2">
+          <div class="testimonial-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            L'Head Spa è diventata la mia routine mensile. Non è solo un trattamento — è un'ora in cui il mondo si ferma. Esco sempre con una sensazione di leggerezza che dura giorni.
+          </p>
+          <div class="testimonial-stars" aria-label="5 stelle su 5">★★★★★</div>
+          <p class="testimonial-author">Valentina C. — Bari</p>
+        </div>
+
+        <div class="testimonial-item" data-reveal data-delay="3">
+          <div class="testimonial-mark" aria-hidden="true">"</div>
+          <p class="testimonial-text">
+            Le extension di Marica sono semplicemente le più belle che io abbia mai avuto. Naturali, precise, durature. Finalmente un risultato che si vede ma non si nota — e questo fa tutta la differenza.
+          </p>
+          <div class="testimonial-stars" aria-label="5 stelle su 5">★★★★★</div>
+          <p class="testimonial-author">Laura B. — Taranto</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -------------------------------------------- -->
+  <section class="newsletter section" id="newsletter" aria-label="Rimani aggiornata">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div data-reveal>
+          <span class="label" style="display:block;margin-bottom:1rem;">Newsletter</span>
+          <h2 class="newsletter-title">Rimani aggiornata</h2>
+          <p class="newsletter-desc">
+            Consigli di skincare, novità sui trattamenti e offerte riservate solo alle iscritte. Niente spam — solo contenuti che valgono il tuo tempo.
+          </p>
+        </div>
+
+        <div data-reveal data-delay="1">
+          <form class="newsletter-form" id="newsletterForm" novalidate>
+            <input
+              class="newsletter-input"
+              type="email"
+              name="email"
+              placeholder="La tua email"
+              aria-label="Indirizzo email"
+              autocomplete="email"
+              required
+            >
+            <button class="btn btn--dark" type="submit">Iscriviti</button>
+          </form>
+          <p class="newsletter-note">
+            Potrai cancellarti in qualsiasi momento. Nessuna cessione a terzi.
+          </p>
+          <p class="newsletter-success" id="newsletterSuccess" aria-live="polite">
+            Grazie! Ti scriveremo presto.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO / DOVE SIAMO ------------------------------------- -->
+  <section class="info section" id="dove-siamo" aria-label="Dove siamo e orari">
+    <div class="container">
+      <div class="info-grid">
+
+        <div data-reveal="left">
+          <p class="info-block-label">Posizione</p>
+          <h2 class="info-block-title">Vieni a trovarci</h2>
+          <p class="info-address">
+            Via Vico Traversa 1<br>
+            Bari, Puglia — 70100
+          </p>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Via+Vico+Traversa+1+Bari"
+            class="info-link"
+            target="_blank" rel="noopener"
+            aria-label="Apri Via Vico Traversa 1 Bari in Google Maps"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+            Apri in Google Maps
+          </a>
+        </div>
+
+        <div data-reveal="right">
+          <p class="info-block-label">Orari</p>
+          <h2 class="info-block-title">Quando siamo aperte</h2>
+          <div class="hours-list" role="list">
+            <div class="hour-row is-closed" role="listitem">
+              <span class="hour-day">Lunedì</span>
+              <span class="hour-time">Chiuso</span>
+            </div>
+            <div class="hour-row is-open" role="listitem">
+              <span class="hour-day">Martedì</span>
+              <span class="hour-time">9:00 – 18:00</span>
+            </div>
+            <div class="hour-row is-open" role="listitem">
+              <span class="hour-day">Mercoledì</span>
+              <span class="hour-time">9:00 – 18:00</span>
+            </div>
+            <div class="hour-row is-open" role="listitem">
+              <span class="hour-day">Giovedì</span>
+              <span class="hour-time">9:00 – 18:00</span>
+            </div>
+            <div class="hour-row is-open" role="listitem">
+              <span class="hour-day">Venerdì</span>
+              <span class="hour-time">9:00 – 18:00</span>
+            </div>
+            <div class="hour-row is-open" role="listitem">
+              <span class="hour-day">Sabato</span>
+              <span class="hour-time">9:00 – 18:00</span>
+            </div>
+            <div class="hour-row is-closed" role="listitem">
+              <span class="hour-day">Domenica</span>
+              <span class="hour-time">Chiuso</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info-cta" data-reveal>
+        <div>
+          <p class="info-cta-text">Prenota la tua prima visita.</p>
+          <p class="info-cta-sub">Risposta garantita in meno di due ore.</p>
+        </div>
+        <a
+          href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20un%20trattamento"
+          class="btn btn--primary"
+          target="_blank" rel="noopener"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Scrivici su WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer" aria-label="Piè di pagina">
+  <div class="container">
+    <div class="footer-top">
+
+      <div>
+        <p class="footer-brand">Lumia</p>
+        <p class="footer-tagline">
+          Il primo Face Lab di Bari dedicato esclusivamente al viso.<br>
+          Via Vico Traversa 1, Bari — Mar-Sab 9:00–18:00
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-col-label">Trattamenti</p>
+        <ul class="footer-links">
+          <li><a href="#trattamenti">Acne Control</a></li>
+          <li><a href="#trattamenti">Hydra Glow Detox</a></li>
+          <li><a href="#trattamenti">Anti-Age Lifting</a></li>
+          <li><a href="#trattamenti">Epilazione Laser</a></li>
+          <li><a href="#trattamenti">Head Spa Premium</a></li>
+          <li><a href="#trattamenti">Extension Ciglia</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-label">Info</p>
+        <ul class="footer-links">
+          <li><a href="#chi-siamo">Chi Siamo</a></li>
+          <li><a href="#dove-siamo">Dove Siamo</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li>
+            <a
+              href="https://wa.me/393401234567"
+              target="_blank" rel="noopener"
+            >WhatsApp</a>
+          </li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        &copy; 2025 LUMIA Face Lab · P.IVA 00000000000 ·
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </p>
+      <p class="footer-legal">
+        Designed with care in Bari
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a
+  href="https://wa.me/393401234567?text=Ciao,%20vorrei%20prenotare%20un%20trattamento"
+  class="whatsapp-fab"
+  target="_blank" rel="noopener"
+  aria-label="Prenota su WhatsApp"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── COOKIE BANNER ──────────────────────────────────────── */
+  const cookieOverlay = document.getElementById('cookieOverlay');
+  const cookieAccept  = document.getElementById('cookieAccept');
+  const cookieReject  = document.getElementById('cookieReject');
+  const CONSENT_KEY   = 'lumia_cookie_consent';
+
+  function dismissCookie(accepted) {
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({
+      ts: new Date().toISOString(),
+      accepted
+    }));
+    cookieOverlay.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+  }
+
+  if (localStorage.getItem(CONSENT_KEY)) {
+    cookieOverlay.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+  }
+
+  cookieAccept.addEventListener('click', () => dismissCookie(true));
+  cookieReject.addEventListener('click', () => dismissCookie(false));
+
+  /* ── NAVIGATION ─────────────────────────────────────────── */
+  const siteNav   = document.getElementById('siteNav');
+  const navToggle = document.getElementById('navToggle');
+  const navMenu   = document.getElementById('navMenu');
+
+  let menuOpen = false;
+
+  function openMenu() {
+    menuOpen = true;
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Chiudi menu');
+    navMenu.classList.add('open');
+    document.body.classList.add('no-scroll');
+  }
+
+  function closeMenu() {
+    menuOpen = false;
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Apri menu');
+    navMenu.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
+
+  navToggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+
+  document.querySelectorAll('.js-menu-link').forEach(link => {
+    link.addEventListener('click', () => closeMenu());
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menuOpen) closeMenu();
+  });
+
+  /* Scroll: compact nav */
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 60) {
+      siteNav.classList.add('scrolled');
+    } else {
+      siteNav.classList.remove('scrolled');
+    }
+    lastScroll = y;
+  }, { passive: true });
+
+  /* ── SCROLL REVEAL ──────────────────────────────────────── */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('revealed'));
+  }
+
+  /* ── NEWSLETTER FORM ────────────────────────────────────── */
+  const newsletterForm    = document.getElementById('newsletterForm');
+  const newsletterSuccess = document.getElementById('newsletterSuccess');
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value.trim();
+      if (!email || !email.includes('@')) return;
+
+      /* TODO: connect to Brevo / Mailchimp endpoint */
+      newsletterForm.style.display = 'none';
+      newsletterSuccess.style.display = 'block';
+    });
+  }
+
+  /* ── SMOOTH SCROLL for anchor links ────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const id = this.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const offset = siteNav.offsetHeight + 8;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  /* ── BEFORE/AFTER SLIDER ── */
+  function initBaSlider(sliderId, afterImgId, handleId, initPct = 0.5, reversed = false) {
+    const slider   = document.getElementById(sliderId);
+    if (!slider) return;
+    const afterImg = document.getElementById(afterImgId);
+    const handle   = document.getElementById(handleId);
+    let pct = initPct;
+    let dragging = false;
+
+    function render() {
+      afterImg.style.clipPath = reversed
+        ? `inset(0 ${((1 - pct) * 100).toFixed(2)}% 0 0)`
+        : `inset(0 0 0 ${(pct * 100).toFixed(2)}%)`;
+      handle.style.left = (pct * 100) + '%';
+    }
+
+    function onMove(clientX) {
+      const rect = slider.getBoundingClientRect();
+      pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      render();
+    }
+
+    render();
+
+    slider.addEventListener('mousedown',  e => { dragging = true;  onMove(e.clientX); e.preventDefault(); });
+    window.addEventListener('mousemove',  e => { if (dragging) onMove(e.clientX); });
+    window.addEventListener('mouseup',    () => { dragging = false; });
+    slider.addEventListener('touchstart', e => { dragging = true;  onMove(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove',  e => { if (dragging) onMove(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend',   () => { dragging = false; });
+  }
+
+  initBaSlider('baSlider01', 'baAfter01', 'baHandle01');
+  initBaSlider('baSlider02', 'baAfter02', 'baHandle02', 0.10, true);
+  initBaSlider('baSlider03', 'baAfter03', 'baHandle03', 0.10, true);
+
+})();
+</script>
+
+</body>
+</html>
