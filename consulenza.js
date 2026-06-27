@@ -3,7 +3,6 @@
 
   var SUPA_URL = 'https://jspdwpeepjroleorelbw.supabase.co';
   var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcGR3cGVlcGpyb2xlb3JlbGJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTMzODQsImV4cCI6MjA5MjYyOTM4NH0.D0NXPMI9IYSzdhz8qqjMLeCWgNAY4YQqyMwyHyzj6vQ';
-  var DURATION = 45;
   var MAX_AUTO_ADVANCE = 8; // settimane saltate automaticamente se vuote
   var MAX_PER_DAY = 3;      // slot mostrati per giorno (scarsita', solo vista)
 
@@ -46,12 +45,18 @@
     if (weekCache[fromStr]) return Promise.resolve(weekCache[fromStr]);
     return fetch(SUPA_URL + '/functions/v1/get-consultation-slots', {
       method: 'POST', headers: apiHeaders,
-      body: JSON.stringify({ from_date: fromStr, days: 7, duration_minutes: DURATION })
+      body: JSON.stringify({ from_date: fromStr, days: 7 })
     }).then(function (r) { return r.json(); }).then(function (d) {
       var slots = d.slots || [];
+      if (d.durata_minuti) updateKicker(d.durata_minuti);
       weekCache[fromStr] = slots;
       return slots;
     });
+  }
+
+  function updateKicker(min) {
+    var k = document.querySelector('.cform-kicker');
+    if (k) k.textContent = 'Gratuita · ' + min + ' minuti';
   }
 
   function bookSlot(nome, cognome, telefono, data_ora) {
