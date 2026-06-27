@@ -59,10 +59,10 @@
     if (k) k.textContent = 'Gratuita · ' + min + ' minuti';
   }
 
-  function bookSlot(nome, cognome, telefono, data_ora) {
+  function bookSlot(nome, cognome, telefono, data_ora, note) {
     return fetch(SUPA_URL + '/functions/v1/book-consultation', {
       method: 'POST', headers: apiHeaders,
-      body: JSON.stringify({ nome: nome, cognome: cognome, telefono: telefono, data_ora: data_ora })
+      body: JSON.stringify({ nome: nome, cognome: cognome, telefono: telefono, data_ora: data_ora, note: note })
     }).then(function (r) {
       return r.json().then(function (d) {
         if (!r.ok) { var e = new Error(d.message || d.error || 'Errore'); e.code = d.error; throw e; }
@@ -114,9 +114,14 @@
       '.cform-fields{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem}',
       '@media(min-width:560px){.cform-fields{flex-direction:row;flex-wrap:wrap}.cform-field{flex:1 1 180px}}',
       '.cform-field{display:flex;flex-direction:column;gap:.375rem}',
+      '.cform-field-full{flex:1 1 100%}',
       '.cform-field label{font-family:var(--f-body,"Outfit",sans-serif);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted,#7A7570)}',
-      '.cform-field input{font-family:var(--f-body,"Outfit",sans-serif);font-size:.9375rem;padding:.8125rem 1rem;background:var(--surface,#FDFAF6);border:1.5px solid var(--gold-pale,#E8D5B0);color:var(--ink,#1A1814);outline:none;transition:border-color 180ms;width:100%;box-sizing:border-box}',
-      '.cform-field input:focus{border-color:var(--gold,#B8965A)}',
+      '.cform-field input,.cform-field textarea{font-family:var(--f-body,"Outfit",sans-serif);font-size:.9375rem;padding:.8125rem 1rem;background:var(--surface,#FDFAF6);border:1.5px solid var(--gold-pale,#E8D5B0);color:var(--ink,#1A1814);outline:none;transition:border-color 180ms;width:100%;box-sizing:border-box}',
+      '.cform-field textarea{resize:vertical;min-height:3.25rem;line-height:1.5}',
+      '.cform-field input:focus,.cform-field textarea:focus{border-color:var(--gold,#B8965A)}',
+      '.cform-field input.cform-input-err,.cform-field textarea.cform-input-err{border-color:#dc2626;background:rgba(220,38,38,.04)}',
+      '.cform-field-err{font-family:var(--f-body,"Outfit",sans-serif);font-size:.75rem;color:#dc2626;display:none}',
+      '.cform-field-err.cform-visible{display:block}',
       '.cform-submit{font-family:var(--f-body,"Outfit",sans-serif);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9375rem 2.5rem;background:var(--gold,#B8965A);border:1px solid var(--gold,#B8965A);color:var(--ink,#1A1814);cursor:pointer;transition:all 380ms}',
       '.cform-submit:hover{background:var(--gold-deep,#8B6B2E);border-color:var(--gold-deep,#8B6B2E)}',
       '.cform-submit:disabled{opacity:.55;cursor:not-allowed}',
@@ -144,8 +149,39 @@
     var inp = document.createElement('input');
     inp.id = id; inp.type = type; inp.placeholder = placeholder;
     inp.autocomplete = autocomplete; inp.required = true;
-    wrap.appendChild(lbl); wrap.appendChild(inp);
+    var err = el('p', 'cform-field-err', { id: id + '-err' });
+    inp.addEventListener('input', function () { clearFieldError(id); });
+    wrap.appendChild(lbl); wrap.appendChild(inp); wrap.appendChild(err);
     return wrap;
+  }
+
+  function makeTextarea(id, label, placeholder) {
+    var wrap = el('div', 'cform-field cform-field-full');
+    var lbl = document.createElement('label'); lbl.htmlFor = id; lbl.textContent = label;
+    var ta = document.createElement('textarea');
+    ta.id = id; ta.rows = 3; ta.placeholder = placeholder;
+    wrap.appendChild(lbl); wrap.appendChild(ta);
+    return wrap;
+  }
+
+  function setFieldError(id, msg) {
+    var inp = document.getElementById(id);
+    var err = document.getElementById(id + '-err');
+    if (inp) inp.classList.add('cform-input-err');
+    if (err) { err.textContent = msg; err.classList.add('cform-visible'); }
+  }
+
+  function clearFieldError(id) {
+    var inp = document.getElementById(id);
+    var err = document.getElementById(id + '-err');
+    if (inp) inp.classList.remove('cform-input-err');
+    if (err) { err.textContent = ''; err.classList.remove('cform-visible'); }
+  }
+
+  // Telefono valido: opzionale +, cifre/spazi/.-() ; 8-15 cifre effettive.
+  function isValidPhone(v) {
+    var cleaned = v.replace(/[\s.\-()]/g, '');
+    return /^\+?[0-9]{8,15}$/.test(cleaned);
   }
 
   /* ---------- UI build ---------- */
@@ -181,6 +217,7 @@
     fields.appendChild(makeField('cform-nome', 'Nome', 'text', 'Maria', 'given-name'));
     fields.appendChild(makeField('cform-cognome', 'Cognome', 'text', 'Rossi', 'family-name'));
     fields.appendChild(makeField('cform-tel', 'Telefono', 'tel', '+39 333 1234567', 'tel'));
+    fields.appendChild(makeTextarea('cform-note', 'Note (opzionale)', 'Qualcosa che vuoi dirci prima della consulenza...'));
     var submit = el('button', 'cform-submit', { id: 'cform-submit', type: 'button' });
     submit.textContent = 'Conferma la prenotazione';
     var contactTitle = el('h3', 'cform-contact-title'); contactTitle.textContent = 'I tuoi dati';
@@ -404,18 +441,26 @@
     var nome = (document.getElementById('cform-nome') || {}).value || '';
     var cognome = (document.getElementById('cform-cognome') || {}).value || '';
     var telefono = (document.getElementById('cform-tel') || {}).value || '';
+    var note = (document.getElementById('cform-note') || {}).value || '';
     var error = document.getElementById('cform-error');
     var submit = document.getElementById('cform-submit');
-    nome = nome.trim(); cognome = cognome.trim(); telefono = telefono.trim();
-    if (!state.selectedSlot) { showErr(error, 'Seleziona prima un orario disponibile.'); return; }
-    if (!nome) { showErr(error, 'Inserisci il tuo nome.'); return; }
-    if (!cognome) { showErr(error, 'Inserisci il tuo cognome.'); return; }
-    if (!telefono) { showErr(error, 'Inserisci il tuo numero di telefono.'); return; }
-    if (submit) { submit.disabled = true; submit.textContent = 'Invio in corso...'; }
+    nome = nome.trim(); cognome = cognome.trim(); telefono = telefono.trim(); note = note.trim();
+
+    // Validazione per-campo (errore mostrato sotto al campo, non in una label a parte)
+    clearFieldError('cform-nome'); clearFieldError('cform-cognome'); clearFieldError('cform-tel');
     showErr(error, '');
+    var ok = true;
+    if (!nome) { setFieldError('cform-nome', 'Inserisci il tuo nome.'); ok = false; }
+    if (!cognome) { setFieldError('cform-cognome', 'Inserisci il tuo cognome.'); ok = false; }
+    if (!telefono) { setFieldError('cform-tel', 'Inserisci il tuo numero di telefono.'); ok = false; }
+    else if (!isValidPhone(telefono)) { setFieldError('cform-tel', 'Numero di telefono non valido.'); ok = false; }
+    if (!state.selectedSlot) { showErr(error, 'Seleziona prima un orario disponibile.'); ok = false; }
+    if (!ok) return;
+
+    if (submit) { submit.disabled = true; submit.textContent = 'Invio in corso...'; }
 
     var booked = state.selectedSlot;
-    bookSlot(nome, cognome, telefono, booked.data_ora).then(function () {
+    bookSlot(nome, cognome, telefono, booked.data_ora, note).then(function () {
       showSuccess(nome, booked);
     }).catch(function (e) {
       if (submit) { submit.disabled = false; submit.textContent = 'Conferma la prenotazione'; }
