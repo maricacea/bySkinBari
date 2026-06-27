@@ -165,7 +165,7 @@
     var timesLabel = el('p', 'cform-times-label', { id: 'cform-times-label' });
     timesLabel.textContent = 'Orari disponibili';
     timesLabel.style.display = 'none';
-    var times = el('div', '', { id: 'cform-times-wrap' });
+    var times = el('div', 'cform-times', { id: 'cform-times-wrap' });
 
     cal.appendChild(nav); cal.appendChild(days); cal.appendChild(timesLabel); cal.appendChild(times);
 
