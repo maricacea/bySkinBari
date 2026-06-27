@@ -59,10 +59,20 @@
     if (k) k.textContent = 'Gratuita · ' + min + ' minuti';
   }
 
-  function bookSlot(nome, cognome, telefono, data_ora, note) {
+  // Nome del trattamento ricavato dalla pagina corrente (es. hydra-glow-detox.html -> "Hydra Glow Detox").
+  function pageTrattamento() {
+    var file = (location.pathname || '').split('/').pop() || '';
+    var slug = file.replace(/\.html?$/i, '').toLowerCase();
+    if (!slug || slug === 'index') return null;
+    return slug.split('-').map(function (w) {
+      return w ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+    }).join(' ');
+  }
+
+  function bookSlot(nome, cognome, telefono, data_ora, note, trattamento) {
     return fetch(SUPA_URL + '/functions/v1/book-consultation', {
       method: 'POST', headers: apiHeaders,
-      body: JSON.stringify({ nome: nome, cognome: cognome, telefono: telefono, data_ora: data_ora, note: note })
+      body: JSON.stringify({ nome: nome, cognome: cognome, telefono: telefono, data_ora: data_ora, note: note, trattamento: trattamento })
     }).then(function (r) {
       return r.json().then(function (d) {
         if (!r.ok) { var e = new Error(d.message || d.error || 'Errore'); e.code = d.error; throw e; }
@@ -460,7 +470,7 @@
     if (submit) { submit.disabled = true; submit.textContent = 'Invio in corso...'; }
 
     var booked = state.selectedSlot;
-    bookSlot(nome, cognome, telefono, booked.data_ora, note).then(function () {
+    bookSlot(nome, cognome, telefono, booked.data_ora, note, pageTrattamento()).then(function () {
       showSuccess(nome, booked);
     }).catch(function (e) {
       if (submit) { submit.disabled = false; submit.textContent = 'Conferma la prenotazione'; }
