@@ -5,6 +5,7 @@
   var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcGR3cGVlcGpyb2xlb3JlbGJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTMzODQsImV4cCI6MjA5MjYyOTM4NH0.D0NXPMI9IYSzdhz8qqjMLeCWgNAY4YQqyMwyHyzj6vQ';
   var DURATION = 30;
   var MAX_AUTO_ADVANCE = 8; // settimane saltate automaticamente se vuote
+  var MAX_PER_DAY = 3;      // slot mostrati per giorno (scarsita', solo vista)
 
   var apiHeaders = {
     'Content-Type': 'application/json',
@@ -337,7 +338,8 @@
       return;
     }
     if (label) label.style.display = '';
-    slots.forEach(function (slot) {
+    var display = pickDisplaySlots(slots);
+    display.forEach(function (slot) {
       var b = el('button', 'cform-time', { type: 'button' });
       b.textContent = slot.ora;
       b.setAttribute('data-ora', slot.data_ora);
@@ -351,6 +353,20 @@
     return WD_FULL[dt.getDay()] + ' ' + dt.getDate() + ' ' + MON_FULL[dt.getMonth()] + ' · ' + slot.ora;
   }
   function parseDateOnly(ds) { var p = ds.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+
+  // Sceglie fino a MAX_PER_DAY slot ben distribuiti nella giornata, in modo
+  // deterministico: a parita' di disponibilita' la scelta non cambia mai (no random).
+  function pickDisplaySlots(slots) {
+    var n = slots.length;
+    if (n <= MAX_PER_DAY) return slots.slice();
+    var seen = {}, out = [];
+    for (var i = 0; i < MAX_PER_DAY; i++) {
+      var idx = Math.round(i * (n - 1) / (MAX_PER_DAY - 1));
+      var s = slots[idx];
+      if (!seen[s.data_ora]) { seen[s.data_ora] = 1; out.push(s); }
+    }
+    return out;
+  }
 
   function selectSlot(slot, btn) {
     var all = document.querySelectorAll('.cform-time.cform-time-sel');
