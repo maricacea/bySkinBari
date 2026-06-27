@@ -350,6 +350,12 @@
   }
   function parseDateOnly(ds) { var p = ds.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
 
+  // Data + orario senza separatore, per il messaggio di conferma (es. "Lunedì 29 giugno 09:00").
+  function dateTimeLabel(slot) {
+    var dt = parseDateOnly(slot.giorno);
+    return WD_FULL[dt.getDay()] + ' ' + dt.getDate() + ' ' + MON_FULL[dt.getMonth()] + ' ' + slot.ora;
+  }
+
   // Hash deterministico di una stringa (FNV-1a) -> intero >= 0.
   function hashStr(str) {
     var h = 2166136261;
@@ -405,7 +411,7 @@
 
     var booked = state.selectedSlot;
     bookSlot(nome, cognome, telefono, booked.data_ora).then(function () {
-      showSuccess(nome, slotLabel(booked));
+      showSuccess(nome, booked);
     }).catch(function (e) {
       if (submit) { submit.disabled = false; submit.textContent = 'Conferma la prenotazione'; }
       if (e.code === 'slot_taken' || e.code === 'chiusura' || e.code === 'pausa_pranzo') {
@@ -428,7 +434,7 @@
     elm.classList.toggle('cform-visible', !!msg);
   }
 
-  function showSuccess(nome, label) {
+  function showSuccess(nome, slot) {
     var cal = document.querySelector('.cform-cal');
     var contact = document.getElementById('cform-contact');
     var success = document.getElementById('cform-success');
@@ -436,7 +442,7 @@
     if (cal) cal.style.display = 'none';
     if (contact) contact.style.display = 'none';
     if (success) success.classList.add('cform-visible');
-    if (body) body.textContent = 'Ciao ' + nome + ', la tua consulenza è confermata per ' + label + '. Ti aspettiamo!';
+    if (body) body.textContent = 'Ciao ' + nome + ' ti aspettiamo il ' + dateTimeLabel(slot);
     if (success) success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
