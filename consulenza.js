@@ -93,12 +93,9 @@
       '.cform-day-wd{font-family:var(--f-body,"Outfit",sans-serif);font-size:.625rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted,#7A7570)}',
       '.cform-day.cform-day-sel .cform-day-wd{color:var(--ink,#1A1814)}',
       '.cform-day-num{font-family:var(--f-display,"Cormorant",Georgia,serif);font-size:1.375rem;font-weight:500}',
-      '.cform-day-dot{width:4px;height:4px;border-radius:50%;background:var(--gold,#B8965A);margin-top:.1rem}',
-      '.cform-day.cform-day-sel .cform-day-dot{background:var(--ink,#1A1814)}',
-      '.cform-day-dot.cform-day-dot-off{background:transparent}',
-      '.cform-times-label{font-family:var(--f-body,"Outfit",sans-serif);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted,#7A7570);margin-bottom:1rem}',
-      '.cform-times{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:.6rem}',
-      '.cform-time{font-family:var(--f-body,"Outfit",sans-serif);font-size:.9375rem;font-weight:500;padding:.75rem .5rem;background:var(--surface,#FDFAF6);border:1.5px solid var(--gold-pale,#E8D5B0);color:var(--ink,#1A1814);cursor:pointer;text-align:center;transition:all 160ms}',
+      '.cform-times-label{font-family:var(--f-body,"Outfit",sans-serif);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted,#7A7570);margin-bottom:1.25rem;text-align:center}',
+      '.cform-times{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}',
+      '.cform-time{font-family:var(--f-body,"Outfit",sans-serif);font-size:.9375rem;font-weight:500;min-width:104px;padding:.8125rem 1.25rem;background:var(--surface,#FDFAF6);border:1.5px solid var(--gold-pale,#E8D5B0);color:var(--ink,#1A1814);cursor:pointer;text-align:center;transition:all 160ms}',
       '.cform-time:hover{border-color:var(--gold,#B8965A);background:rgba(184,150,90,.06)}',
       '.cform-time.cform-time-sel{background:var(--gold,#B8965A);border-color:var(--gold,#B8965A);font-weight:600}',
       '.cform-empty{font-family:var(--f-body,"Outfit",sans-serif);font-size:.9375rem;color:var(--ink-muted,#7A7570);padding:1.5rem 0;text-align:center}',
@@ -303,8 +300,7 @@
       btn.disabled = !has || past;
       var wd = el('span', 'cform-day-wd'); wd.textContent = WD[day.getDay()];
       var num = el('span', 'cform-day-num'); num.textContent = day.getDate();
-      var dot = el('span', 'cform-day-dot' + (has ? '' : ' cform-day-dot-off'));
-      btn.appendChild(wd); btn.appendChild(num); btn.appendChild(dot);
+      btn.appendChild(wd); btn.appendChild(num);
       btn.setAttribute('data-day', ds);
       if (has && !past) {
         btn.addEventListener('click', (function (d) { return function () { selectDay(d); }; })(ds));
