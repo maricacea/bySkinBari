@@ -435,14 +435,16 @@
   }
 
   function showSuccess(nome, slot) {
+    var header = document.querySelector('.cform-header');
     var cal = document.querySelector('.cform-cal');
     var contact = document.getElementById('cform-contact');
     var success = document.getElementById('cform-success');
     var body = document.getElementById('cform-success-body');
+    if (header) header.style.display = 'none';
     if (cal) cal.style.display = 'none';
     if (contact) contact.style.display = 'none';
     if (success) success.classList.add('cform-visible');
-    if (body) body.textContent = 'Ciao ' + nome + ' ti aspettiamo il ' + dateTimeLabel(slot);
+    if (body) body.textContent = 'Ciao ' + nome + ' ti aspettiamo ' + dateTimeLabel(slot);
     if (success) success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
