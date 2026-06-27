@@ -338,7 +338,7 @@
       return;
     }
     if (label) label.style.display = '';
-    var display = pickDisplaySlots(slots);
+    var display = pickDisplaySlots(slots, ds);
     display.forEach(function (slot) {
       var b = el('button', 'cform-time', { type: 'button' });
       b.textContent = slot.ora;
@@ -354,16 +354,27 @@
   }
   function parseDateOnly(ds) { var p = ds.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
 
-  // Sceglie fino a MAX_PER_DAY slot ben distribuiti nella giornata, in modo
-  // deterministico: a parita' di disponibilita' la scelta non cambia mai (no random).
-  function pickDisplaySlots(slots) {
+  // Hash deterministico di una stringa (FNV-1a) -> intero >= 0.
+  function hashStr(str) {
+    var h = 2166136261;
+    for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+
+  // Sceglie fino a MAX_PER_DAY slot distribuiti nella giornata (una per fascia),
+  // l'orario esatto dentro ogni fascia dipende dalla DATA del giorno: vario tra
+  // i giorni ma sempre identico per lo stesso giorno (deterministico, no random).
+  function pickDisplaySlots(slots, giorno) {
     var n = slots.length;
     if (n <= MAX_PER_DAY) return slots.slice();
     var seen = {}, out = [];
-    for (var i = 0; i < MAX_PER_DAY; i++) {
-      var idx = Math.round(i * (n - 1) / (MAX_PER_DAY - 1));
+    for (var b = 0; b < MAX_PER_DAY; b++) {
+      var start = Math.floor(b * n / MAX_PER_DAY);
+      var end = Math.floor((b + 1) * n / MAX_PER_DAY); // esclusivo
+      if (end <= start) end = start + 1;
+      var idx = start + (hashStr(giorno + ':' + b) % (end - start));
       var s = slots[idx];
-      if (!seen[s.data_ora]) { seen[s.data_ora] = 1; out.push(s); }
+      if (s && !seen[s.data_ora]) { seen[s.data_ora] = 1; out.push(s); }
     }
     return out;
   }
