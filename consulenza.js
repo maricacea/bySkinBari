@@ -385,7 +385,7 @@
     var error = document.getElementById('cform-error');
     if (badge) badge.textContent = slotLabel(slot);
     if (error) { error.textContent = ''; error.classList.remove('cform-visible'); }
-    if (contact) { contact.classList.add('cform-visible'); contact.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    if (contact) { contact.classList.add('cform-visible'); contact.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   }
 
   /* ---------- booking ---------- */
