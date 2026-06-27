@@ -3,7 +3,7 @@
 
   var SUPA_URL = 'https://jspdwpeepjroleorelbw.supabase.co';
   var ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcGR3cGVlcGpyb2xlb3JlbGJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNTMzODQsImV4cCI6MjA5MjYyOTM4NH0.D0NXPMI9IYSzdhz8qqjMLeCWgNAY4YQqyMwyHyzj6vQ';
-  var DURATION = 30;
+  var DURATION = 45;
   var MAX_AUTO_ADVANCE = 8; // settimane saltate automaticamente se vuote
   var MAX_PER_DAY = 3;      // slot mostrati per giorno (scarsita', solo vista)
 
@@ -146,7 +146,7 @@
   /* ---------- UI build ---------- */
   function buildUI(root) {
     var header = el('div', 'cform-header');
-    var k = el('p', 'cform-kicker'); k.textContent = 'Gratuita · 30 minuti';
+    var k = el('p', 'cform-kicker'); k.textContent = 'Gratuita · 45 minuti';
     var t = el('h2', 'cform-title'); t.textContent = 'Prenota la Tua Consulenza';
     var d = el('p', 'cform-desc'); d.textContent = 'Scegli il giorno e l’orario che preferisci, inserisci i tuoi dati e ti aspettiamo in centro.';
     header.appendChild(k); header.appendChild(t); header.appendChild(d);
